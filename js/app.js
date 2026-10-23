@@ -295,17 +295,77 @@
   }
 
   // ---------- Экран: АРТИКУЛЯЦИЯ ----------
-  function mouthSVG() {
-    return `
-      <svg viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="110" cy="120" r="92" fill="#FFDFC4" stroke="#E8B98C" stroke-width="5"/>
-        <circle cx="80" cy="95" r="6" fill="#3D2C2E"/>
-        <circle cx="140" cy="95" r="6" fill="#3D2C2E"/>
-        <circle cx="83" cy="93" r="2" fill="#fff"/>
-        <circle cx="137" cy="93" r="2" fill="#fff"/>
-        <ellipse cx="110" cy="136" rx="50" ry="34" fill="#8A4A57" stroke="#6E3542" stroke-width="4"/>
-        <ellipse class="lmtongue" cx="110" cy="142" rx="28" ry="16" fill="#E15B5B"/>
-      </svg>`;
+  // ---------- Рисунок-подсказка для каждого упражнения ----------
+  function mouthSVG(type) {
+    const F =
+      '<circle cx="110" cy="118" r="84" fill="#FFDFC4" stroke="#E8B98C" stroke-width="6"/>' +
+      '<circle cx="79" cy="96" r="6.5" fill="#3D2C2E"/><circle cx="141" cy="96" r="6.5" fill="#3D2C2E"/>' +
+      '<circle cx="82" cy="94" r="2" fill="#fff"/><circle cx="138" cy="94" r="2" fill="#fff"/>';
+    const S =
+      '<style>@keyframes ud{0%,100%{transform:translateY(-7px)}50%{transform:translateY(7px)}}' +
+      '@keyframes lr{0%,100%{transform:translateX(-9px)}50%{transform:translateX(9px)}}' +
+      '@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}' +
+      '@keyframes spin{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}</style>';
+    let B = '';
+    switch (type) {
+      case 'gorka':
+        B =
+          '<ellipse cx="110" cy="142" rx="46" ry="26" fill="#8A4A57" stroke="#6E3542" stroke-width="4"/>' +
+          '<ellipse class="ud" cx="110" cy="112" rx="32" ry="14" fill="#E15B5B"/>' +
+          '<path d="M110 92 V74 m-8 8 8-8 8 8" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
+        break;
+      case 'cha':
+        B =
+          '<ellipse cx="110" cy="142" rx="46" ry="26" fill="#8A4A57" stroke="#6E3542" stroke-width="4"/>' +
+          '<rect class="lr" x="62" y="130" width="96" height="22" rx="11" fill="#E15B5B" stroke="#C94A4A" stroke-width="3"/>' +
+          '<path d="M52 141 H34 m8 -8 0 16 -8 -8" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
+          '<path d="M168 141 h18 m-8 -8 0 16 8 -8" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
+        break;
+      case 'kacheli':
+        B =
+          '<ellipse cx="110" cy="142" rx="46" ry="26" fill="#8A4A57" stroke="#6E3542" stroke-width="4"/>' +
+          '<ellipse class="ud" cx="110" cy="140" rx="34" ry="15" fill="#E15B5B"/>' +
+          '<path d="M72 152 v-18 m-7 8 7 -8 7 8" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
+          '<path d="M148 152 v-18 m-7 8 7 -8 7 8" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
+        break;
+      case 'zlob':
+        B =
+          '<ellipse class="ud" cx="110" cy="100" rx="30" ry="14" fill="#E15B5B"/>' +
+          '<ellipse cx="110" cy="142" rx="46" ry="26" fill="#8A4A57" stroke="#6E3542" stroke-width="4"/>' +
+          '<path d="M110 74 V60 m-7 7 7 -7 7 7" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
+          '<path d="M66 74 l-10 -6 m-2 16 12 0" stroke="#3D2C2E" stroke-width="4" fill="none" stroke-linecap="round"/>' +
+          '<path d="M154 74 l10 -6 m2 16 -12 0" stroke="#3D2C2E" stroke-width="4" fill="none" stroke-linecap="round"/>';
+        break;
+      case 'tubka':
+        B =
+          '<path d="M96 122 C112 150 128 150 144 122 L138 112 C122 128 118 128 102 112 Z" fill="#E15B5B" stroke="#C94A4A" stroke-width="3"/>' +
+          '<ellipse cx="144" cy="122" rx="7" ry="12" fill="#F05B5B"/>' +
+          '<ellipse cx="110" cy="138" rx="40" ry="20" fill="#8A4A57" stroke="#6E3542" stroke-width="4"/>' +
+          '<path d="M150 106 c8 -10 14 -4 8 5 M148 112 c10 -8 16 -2 8 6" stroke="#3D2C2E" stroke-width="3" fill="none" stroke-linecap="round"/>';
+        break;
+      case 'bublik':
+        B =
+          '<circle cx="110" cy="138" r="34" fill="#C94A4A" stroke="#8A4A57" stroke-width="4"/>' +
+          '<circle cx="110" cy="138" r="16" fill="#FFDFC4"/>' +
+          '<path class="spin" d="M160 118 a26 26 0 1 1 -20 -34" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round"/>';
+        break;
+      case 'kormit':
+        B =
+          '<ellipse cx="110" cy="142" rx="46" ry="26" fill="#8A4A57" stroke="#6E3542" stroke-width="4"/>' +
+          '<ellipse class="ud" cx="110" cy="106" rx="40" ry="16" fill="#E15B5B"/>' +
+          '<path d="M110 78 V62 m-8 8 8 -8 8 8" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
+        break;
+      case 'krepost':
+        B =
+          '<ellipse cx="110" cy="142" rx="46" ry="26" fill="#8A4A57" stroke="#6E3542" stroke-width="4"/>' +
+          '<rect class="pulse" x="78" y="128" width="64" height="26" rx="13" fill="#E15B5B" stroke="#C94A4A" stroke-width="3"/>' +
+          '<path d="M52 141 H70 m-6 -7 0 14 -6 -7" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
+          '<path d="M168 141 h-18 m6 -7 0 14 6 -7" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
+        break;
+      default:
+        B = '<ellipse cx="110" cy="140" rx="46" ry="26" fill="#8A4A57" stroke="#6E3542" stroke-width="4"/>';
+    }
+    return '<svg viewBox="0 0 220 172" xmlns="http://www.w3.org/2000/svg">' + F + B + S + '</svg>';
   }
 
   function renderArtic() {
@@ -322,7 +382,7 @@
             <span id="chev-${a.id}" style="font-weight:800;color:var(--ink-soft)">▶</span>
           </div>
           <div id="body-${a.id}" class="arti-body" style="display:none">
-            <div class="demo">${mouthSVG()}<style>.lmtongue{animation:lmtong 1.6s ease-in-out infinite}@keyframes lmtong{0%,100%{transform:translateY(4px)}50%{transform:translateY(-6px)}}</style></div>
+            <div class="demo">${mouthSVG(a.id)}</div>
             <ol class="arti-steps">
               ${a.steps.map((s, i) => `<li><span class="num">${i + 1}</span><span>${esc(s)}</span></li>`).join('')}
             </ol>
