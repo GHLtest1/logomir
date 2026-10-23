@@ -130,7 +130,7 @@
           <h1>Поговорим<br>сегодня?</h1>
           <div class="sub">Лисёнок Ля и зверята помогут звукам зазвучать правильно.</div>
         </div>
-        <img class="mascot-img wob" src="/assets/hero-fox.webp" alt="Лисёнок Ля">
+        <img class="mascot-img wob" src="assets/hero-fox.webp" alt="Лисёнок Ля">
       </div>
       <div class="sections">
         <div class="sec" data-go="library"><span class="ico">🔊</span><b>Звуки</b><small>библиотека звуков</small></div>
@@ -155,7 +155,7 @@
   function renderSounds() {
     const p = store();
     screens.sounds.innerHTML = `
-      <div class="scr-head"><span class="htile"><img src="/assets/hero-fox.webp" alt=""></span><span><b>Проработка звуков</b><small>Тренируем звук по этапам</small></span></div>
+      <div class="scr-head"><span class="htile"><img src="assets/hero-fox.webp" alt=""></span><span><b>Проработка звуков</b><small>Тренируем звук по этапам</small></span></div>
       <div class="card">
         <p class="card-title">Выбери зверёнка-звук</p>
         <p class="card-sub">Нажми на зверька, чей звук тренируем. Сначала — слоги, потом слова и фразы.</p>
@@ -394,7 +394,7 @@
             <span id="chev-${a.id}" style="font-weight:800;color:var(--ink-soft)">▶</span>
           </div>
           <div id="body-${a.id}" class="arti-body" style="display:none">
-            <div class="demo"><img class="demo-img" src="/assets/artic-${articImg(a.id)}.webp" alt="${esc(a.name)}"></div>
+            <div class="demo"><img class="demo-img" src="assets/artic-${articImg(a.id)}.webp" alt="${esc(a.name)}"></div>
             <ol class="arti-steps">
               ${a.steps.map((s, i) => `<li><span class="num">${i + 1}</span><span>${esc(s)}</span></li>`).join('')}
             </ol>
@@ -417,7 +417,7 @@
   function renderPlay() {
     const item = D.play.find(p => p.id === state.playId) || D.play[state.playId != null ? Math.min(D.play.length - 1, Math.floor(state.playId)) : 0];
     screens.play.innerHTML = `
-      <div class="play-banner"><img src="/assets/play-talking.webp" alt=""></div>
+      <div class="play-banner"><img src="assets/play-talking.webp" alt=""></div>
       <div class="card">
         <p class="card-title">Кто так говорит?</p>
         <p class="card-sub">Покажи картинку, нажми на громкоговоритель, малыш повторяет. Потом отметь — получилось ли.</p>
@@ -723,7 +723,7 @@
   function renderLibrary() {
     const onCats = state.libTab !== 'games';
     screens.library.innerHTML = `
-      <div class="scr-head"><span class="htile"><img src="/assets/hero-fox.webp" alt=""></span><span><b>Звуки</b><small>Изучаем звуки вокруг</small></span></div>
+      <div class="scr-head"><span class="htile"><img src="assets/hero-fox.webp" alt=""></span><span><b>Звуки</b><small>Изучаем звуки вокруг</small></span></div>
       <div class="seg">
         <button class="seg-btn ${onCats ? 'on' : ''}" id="segCats">🔊 Звуки</button>
         <button class="seg-btn ${!onCats ? 'on' : ''}" id="segGames">🎮 Игры</button>
@@ -747,9 +747,10 @@
   function renderLibCats(body) {
     body.innerHTML = `<div class="lib-note">Выбери раздел и нажимай на картинку — услышишь, как она звучит.</div>
       <div class="cat-grid">
-        ${D.library.categories.map(c => `<button class="cat-card" data-cat="${c.id}"><span class="ico">${c.emoji}</span><b>${esc(c.name)}</b></button>`).join('')}
+        ${D.library.categories.map(c => `<button class="cat-card" data-cat="${c.id}"><span class="ico" data-img="assets/cat-${c.id}.webp">${c.emoji}</span><b>${esc(c.name)}</b></button>`).join('')}
       </div>`;
     $$('.cat-card', body).forEach(b => b.onclick = () => { state.libCat = b.dataset.cat; renderLibBody(); });
+    wireImages(body);
   }
   function renderLibItems(body) {
     const cat = catById(state.libCat);
@@ -794,7 +795,7 @@
   function renderGameCats(body) {
     body.innerHTML = `<div class="lib-note">Выбери категорию. Я сыграю звук — угадай, что звучало, по картинкам.</div>
       <div class="cat-grid">
-        ${D.library.categories.map(c => `<button class="cat-card" data-cat="${c.id}"><span class="ico">${c.emoji}</span><b>${esc(c.name)}</b></button>`).join('')}
+        ${D.library.categories.map(c => `<button class="cat-card" data-cat="${c.id}"><span class="ico" data-img="assets/cat-${c.id}.webp">${c.emoji}</span><b>${esc(c.name)}</b></button>`).join('')}
       </div>`;
     $$('.cat-card', body).forEach(b => b.onclick = () => {
       state.gameCat = b.dataset.cat;
@@ -802,6 +803,7 @@
       state.gameRound = newRound(catById(b.dataset.cat));
       renderLibBody();
     });
+    wireImages(body);
   }
   function renderGame(body) {
     const r = state.gameRound;

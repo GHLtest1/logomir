@@ -356,6 +356,7 @@ body {
 }
 .cat-card:active { transform: scale(.97); }
 .cat-card .ico { font-size: 42px; display: block; margin-bottom: 8px; }
+.cat-card .ico img { width: 100%; height: auto; border-radius: 16px; display: block; }
 .cat-card b { font-size: 14px; }
 
 .lib-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
