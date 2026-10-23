@@ -165,7 +165,7 @@
       </div>
     `;
     $$('.sound-pill', screens.sounds).forEach(b => {
-      b.onclick = () => { state.soundId = b.dataset.sound; state.stage = 'syllables'; state.i = 0; renderSound(); };
+      b.onclick = () => { state.soundId = b.dataset.sound; state.stage = 'syllables'; state.i = 0; navigate('sound'); };
     });
   }
 
@@ -194,7 +194,7 @@
       body = `
         <div class="sound-head">
           <span class="big" style="background:${sound.color}">${sound.emoji}</span>
-          <span><b>Молодец!</b><small>${STAGES[state.stage][1]} готовы</small></span>
+          <span><b>Молодец!</b><small>${STAGES[stageIndex][1]} готовы</small></span>
         </div>
         <div class="play-big pop">
           <div class="face">🎉</div>
@@ -214,14 +214,14 @@
       body = `
         <div class="sound-head">
           <span class="big" style="background:${sound.color}">${sound.emoji}</span>
-          <span><b>Звук «${sound.letter}»</b><small>${sound.animal} ${STAGES[state.stage][0] === 'twisters' ? 'тараторит' : 'помогает'}</small></span>
+          <span><b>Звук «${sound.letter}»</b><small>${sound.animal} ${STAGES[stageIndex][0] === 'twisters' ? 'тараторит' : 'помогает'}</small></span>
         </div>
         <div class="stage-tabs">
           ${STAGES.map((st, idx) => `
             <button class="stage-tab ${idx === stageIndex ? 'on' : ''}" data-stage="${st[0]}">${st[1]}</button>`).join('')}
         </div>
         <div class="word-card pop">
-          <div class="stage-label">${STAGES[state.stage][1]} · ${done + 1} из ${total}</div>
+          <div class="stage-label">${STAGES[stageIndex][1]} · ${done + 1} из ${total}</div>
           <div class="art">${current.art}</div>
           ${current.txt ? `<div class="txt">${esc(current.txt)}</div>` : ''}
           <button class="btn-speak" id="say">🔊</button>
@@ -256,7 +256,6 @@
     if (got) {
       got.onclick = () => {
         record('sound', sound.id, true);
-        if (!current.txt) return;
         burst();
         renderSoundNext();
       };
