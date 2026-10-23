@@ -374,3 +374,28 @@ body {
 .game-opt.no { opacity: .45; border-color: #E6A6A0; background: #FBE9E6; }
 .game-opt.locked { cursor: default; }
 .game-opt:not(.locked):active { transform: scale(.95); }
+
+/* ---------- Полноэкранный просмотр звука ---------- */
+.fullov {
+  position: fixed; inset: 0; z-index: 100;
+  background: radial-gradient(120% 120% at 50% 30%, rgba(61,44,46,.88), rgba(30,20,22,.96));
+  display: flex; align-items: center; justify-content: center;
+  animation: rise .22s ease;
+}
+.full-close {
+  position: absolute; top: 18px; right: 18px; z-index: 2;
+  width: 44px; height: 44px; border-radius: 50%; border: none;
+  background: rgba(255,255,255,.16); color: #fff; font-size: 20px;
+  cursor: pointer;
+}
+.full-box {
+  position: relative; background: var(--card); border: 3px solid #F3BC63;
+  border-radius: 30px; box-shadow: 0 24px 70px rgba(0,0,0,.45);
+  padding: 24px 22px 26px; text-align: center;
+  width: min(88vw, 480px);
+}
+.full-art { display: block; font-size: 130px; line-height: 1.05; margin-bottom: 10px; }
+.full-art img { width: 100%; max-height: 58vh; object-fit: contain; }
+.full-name { font-size: 26px; font-weight: 800; margin-bottom: 18px; }
+.fullov .btn-speak { margin: 0 auto; }
+.full-tap { position: absolute; inset: 0; }

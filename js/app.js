@@ -676,6 +676,38 @@
       im.src = url;
     });
   }
+  function showFull(it) {
+    if (!it) return;
+    playLibSound(it);
+    const ov = document.createElement('div');
+    ov.className = 'fullov';
+    ov.innerHTML = `
+      <button class="full-close">✕</button>
+      <div class="full-box">
+        <span class="full-art"${it.file ? ` data-img="${itemImg(it)}"` : ''}>${it.emoji}</span>
+        <div class="full-name">${esc(it.name)}</div>
+        <button class="btn-speak big" id="fullPlay">🔊</button>
+      </div>
+      <div class="full-tap"></div>`;
+    document.body.appendChild(ov);
+    const art = ov.querySelector('.full-art');
+    if (art && art.dataset.img) {
+      const im = new Image();
+      im.onload = () => {
+        art.textContent = '';
+        const img = document.createElement('img');
+        img.src = art.dataset.img; img.alt = '';
+        art.appendChild(img);
+      };
+      im.src = art.dataset.img;
+    }
+    $('#fullPlay', ov).onclick = () => playLibSound(it);
+    const close = () => { if (ov.parentNode) ov.parentNode.removeChild(ov); };
+    ov.querySelector('.full-close').onclick = close;
+    ov.addEventListener('click', (e) => {
+      if (e.target === ov || e.target.classList.contains('full-tap')) close();
+    });
+  }
 
   function renderLibrary() {
     const onCats = state.libTab !== 'games';
@@ -716,7 +748,7 @@
         ${cat.items.map((it, i) => `<button class="lib-item" data-i="${i}"><span class="art"${it.file ? ` data-img="${itemImg(it)}"` : ''}>${it.emoji}</span><span class="t">${esc(it.name)}</span></button>`).join('')}
       </div>`;
     $('#libBack', body).onclick = () => { state.libCat = null; renderLibBody(); };
-    $$('.lib-item', body).forEach(b => b.onclick = () => { const it = cat.items[+b.dataset.i]; if (it) playLibSound(it); });
+    $$('.lib-item', body).forEach(b => b.onclick = () => { const it = cat.items[+b.dataset.i]; if (it) showFull(it); });
     wireImages(body);
   }
 
