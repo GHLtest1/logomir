@@ -173,9 +173,9 @@
   function soundItems(sound, stage) {
     const list = sound.stages[stage];
     return list.map(it => {
-      if (stage === 'words' && Array.isArray(it)) return { art: it[1], txt: it[0] };
-      if (stage === 'syllables') return { art: `<span class="colorLetter" style="background:${sound.color}">${sound.letter}${it}</span>`, txt: '' };
-      return { art: stage === 'phrases' ? '🎤' : '📖', txt: it };
+      if (stage === 'words' && Array.isArray(it)) return { art: it[1], txt: it[0], say: it[0] };
+      if (stage === 'syllables') return { art: `<span class="colorLetter" style="background:${sound.color}">${sound.letter}${it}</span>`, txt: '', say: it };
+      return { art: stage === 'phrases' ? '🎤' : '📖', txt: it, say: it };
     });
   }
 
@@ -251,7 +251,7 @@
       b.onclick = () => { state.stage = b.dataset.stage; state.i = 0; renderSound(); };
     });
     const say = $('#say', screens.sound);
-    if (say) { say.onclick = () => { speak(current.txt); say.classList.add('pop'); setTimeout(() => say.classList.remove('pop'), 300); }; }
+    if (say) { say.onclick = () => { speak(current.say || current.txt); say.classList.add('pop'); setTimeout(() => say.classList.remove('pop'), 300); }; }
     const got = $('#gotIt', screens.sound);
     if (got) {
       got.onclick = () => {
@@ -262,7 +262,7 @@
       };
     }
     const again = $('#again', screens.sound);
-    if (again) again.onclick = () => { showHint(); speak(current.txt); };
+    if (again) again.onclick = () => { showHint(); speak(current.say || current.txt); };
     const skip = $('#skip', screens.sound);
     if (skip) skip.onclick = () => { state.i++; renderSound(); };
     const nextStage = $('#nextStage', screens.sound);
