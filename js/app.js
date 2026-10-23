@@ -373,6 +373,12 @@
     return '<svg viewBox="0 0 220 182" xmlns="http://www.w3.org/2000/svg">' + F + B + '</svg>';
   }
 
+  const ARTIMG = {
+    gorka: 'gorka', cha: 'chasy', kacheli: 'kacheli', zlob: 'loshad',
+    tubka: 'trubka', bublik: 'bublik', kormit: 'kormit', krepost: 'krepost'
+  };
+  function articImg(id) { return ARTIMG[id] || id; }
+
   function renderArtic() {
     screens.artic.innerHTML = `
       <div class="card">
@@ -387,7 +393,7 @@
             <span id="chev-${a.id}" style="font-weight:800;color:var(--ink-soft)">▶</span>
           </div>
           <div id="body-${a.id}" class="arti-body" style="display:none">
-            <div class="demo">${mouthSVG(a.id)}</div>
+            <div class="demo"><img class="demo-img" src="/assets/artic-${articImg(a.id)}.webp" alt="${esc(a.name)}"></div>
             <ol class="arti-steps">
               ${a.steps.map((s, i) => `<li><span class="num">${i + 1}</span><span>${esc(s)}</span></li>`).join('')}
             </ol>

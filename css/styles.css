@@ -229,6 +229,7 @@ body {
   background: #FFF3E0;
 }
 .demo svg { display: block; width: 100%; height: auto; }
+.demo img { display: block; width: 100%; height: auto; }
 .demo svg * { transform-box: fill-box; transform-origin: center; }
 .demo .t-up { animation: tUp 1.5s ease-in-out infinite; }
 .demo .t-sid { animation: tLr 1.5s ease-in-out infinite; }
