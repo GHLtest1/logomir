@@ -632,7 +632,23 @@
     }
     return true;
   }
+  function playFile(path, onFail) {
+    if (window.__libAudio) { try { window.__libAudio.pause(); } catch (e) {} }
+    const a = new Audio(path);
+    const fail = () => { try { onFail && onFail(); } catch (e) {} };
+    a.onerror = fail;
+    a.play().catch(fail);
+    window.__libAudio = a;
+    return true;
+  }
   function playLibSound(item) {
+    if (item && item.file) {
+      return playFile(item.file, () => {
+        const s = item.sound;
+        if (s && s.indexOf('synth:') === 0) synth(s.slice(6));
+        else speak(s || item.name || '');
+      });
+    }
     const s = item && item.sound;
     if (s && s.indexOf('synth:') === 0) return synth(s.slice(6));
     return speak(s || (item && item.name) || '');
@@ -643,6 +659,23 @@
   function saveLib(st) { try { localStorage.setItem('logomir_lib', JSON.stringify(st)); } catch (e) {} }
   function catById(id) { return D.library.categories.find(c => c.id === id); }
   function shuffle(a) { const r = a.slice(); for (let i = r.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = r[i]; r[i] = r[j]; r[j] = t; } return r; }
+  function itemImg(it) {
+    if (!it || !it.file) return '';
+    return it.file.replace('sounds/', 'images/').replace(/\.ogg$/, '.webp');
+  }
+  function wireImages(root) {
+    $$('[data-img]', root).forEach(span => {
+      const url = span.dataset.img;
+      const im = new Image();
+      im.onload = () => {
+        span.textContent = '';
+        const img = document.createElement('img');
+        img.src = url; img.alt = '';
+        span.appendChild(img);
+      };
+      im.src = url;
+    });
+  }
 
   function renderLibrary() {
     const onCats = state.libTab !== 'games';
@@ -680,10 +713,11 @@
     body.innerHTML = `
       <div class="backrow"><button class="btn back" id="libBack">‹</button><span class="crumb">${esc(cat.name)}</span></div>
       <div class="lib-grid">
-        ${cat.items.map((it, i) => `<button class="lib-item" data-i="${i}"><span class="art">${it.emoji}</span><span class="t">${esc(it.name)}</span></button>`).join('')}
+        ${cat.items.map((it, i) => `<button class="lib-item" data-i="${i}"><span class="art"${it.file ? ` data-img="${itemImg(it)}"` : ''}>${it.emoji}</span><span class="t">${esc(it.name)}</span></button>`).join('')}
       </div>`;
     $('#libBack', body).onclick = () => { state.libCat = null; renderLibBody(); };
     $$('.lib-item', body).forEach(b => b.onclick = () => { const it = cat.items[+b.dataset.i]; if (it) playLibSound(it); });
+    wireImages(body);
   }
 
   // Игра «угадай звук»
@@ -740,7 +774,7 @@
         <button class="btn-speak big" id="gPlay">🔊</button>
       </div>
       <div class="game-grid">
-        ${r.options.map((it, idx) => `<button class="game-opt" data-o="${idx}"><span class="art">${it.emoji}</span><span class="t">${esc(it.name)}</span></button>`).join('')}
+        ${r.options.map((it, idx) => `<button class="game-opt" data-o="${idx}"><span class="art"${it.file ? ` data-img="${itemImg(it)}"` : ''}>${it.emoji}</span><span class="t">${esc(it.name)}</span></button>`).join('')}
       </div>
       <div class="ctrl" style="margin-top:14px">
         <button class="btn again" id="gNext">Дальше ›</button>
@@ -761,6 +795,7 @@
         p.wrong++; bump(r.cat, chosen, 0);
       }
     });
+    wireImages(body);
   }
 
   // ---------- Имя ребёнка ----------

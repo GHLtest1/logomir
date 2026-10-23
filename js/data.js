@@ -174,31 +174,64 @@ window.LM_DATA = {
       {
         id: 'wild', name: 'Дикие животные', emoji: '🦁',
         items: [
-          { name: 'Волк', emoji: '🐺', sound: 'у-у-у' },
-          { name: 'Лев', emoji: '🦁', sound: 'р-р-р' },
-          { name: 'Тигрёнок', emoji: '🐯', sound: 'р-р-р' },
-          { name: 'Обезьянка', emoji: '🐵', sound: 'у-у-а-а' },
-          { name: 'Слон', emoji: '🐘', sound: 'тру-у' },
-          { name: 'Змейка', emoji: '🐍', sound: 'ш-ш-ш' },
-          { name: 'Совёнок', emoji: '🦉', sound: 'ух-ух' },
-          { name: 'Ворона', emoji: '🐦‍⬛', sound: 'кар-кар' },
-          { name: 'Медведь', emoji: '🐻', sound: 'ры-ы-ы' },
-          { name: 'Ёжик', emoji: '🦔', sound: 'фыр-фыр' }
+          { name: 'Волк', emoji: '🐺', sound: 'у-у-у', file: 'sounds/animals_wilk.ogg' },
+          { name: 'Лев', emoji: '🦁', sound: 'р-р-р', file: 'sounds/animals_lew.ogg' },
+          { name: 'Тигрёнок', emoji: '🐯', sound: 'р-р-р', file: 'sounds/animals_tygrys.ogg' },
+          { name: 'Обезьянка', emoji: '🐵', sound: 'у-у-а-а', file: 'sounds/animals_makak.ogg' },
+          { name: 'Слон', emoji: '🐘', sound: 'тру-у', file: 'sounds/animals_slon.ogg' },
+          { name: 'Змейка', emoji: '🐍', sound: 'ш-ш-ш', file: 'sounds/animals_waz.ogg' },
+          { name: 'Совёнок', emoji: '🦉', sound: 'ух-ух', file: 'sounds/animals_sowa.ogg' },
+          { name: 'Ворона', emoji: '🐦‍⬛', sound: 'кар-кар', file: 'sounds/animals_wrona.ogg' },
+          { name: 'Медведь', emoji: '🐻', sound: 'ры-ы-ы', file: 'sounds/animals_niedzwiedz.ogg' },
+          { name: 'Ёжик', emoji: '🦔', sound: 'фыр-фыр', file: 'sounds/animals_jez.ogg' },
+          { name: 'Белка', emoji: '🐿️', sound: 'цок-цок', file: 'sounds/animals_wiewiorka.ogg' },
+          { name: 'Бизон', emoji: '🦬', sound: 'му-у', file: 'sounds/animals_bizon.ogg' },
+          { name: 'Бобр', emoji: '🦫', sound: 'плюх-плюх', file: 'sounds/animals_bobr.ogg' },
+          { name: 'Верблюд', emoji: '🐫', sound: 'ох-ох', file: 'sounds/animals_wielblad.ogg' },
+          { name: 'Горилла', emoji: '🦍', sound: 'ух-грр', file: 'sounds/animals_goryl.ogg' },
+          { name: 'Дельфин', emoji: '🐬', sound: 'пиу-пиу', file: 'sounds/animals_delfin.ogg' },
+          { name: 'Енот', emoji: '🦝', sound: 'фр-фр', file: 'sounds/animals_szop.ogg' },
+          { name: 'Кабан', emoji: '🐗', sound: 'хрю-крр', file: 'sounds/animals_dzik.ogg' },
+          { name: 'Кенгуру', emoji: '🦘', sound: 'тук-тук', file: 'sounds/animals_kangur.ogg' },
+          { name: 'Кит', emoji: '🐋', sound: 'уу-оо', file: 'sounds/animals_wieloryb.ogg' },
+          { name: 'Коала', emoji: '🐨', sound: 'крр-крр', file: 'sounds/animals_koala.ogg' },
+          { name: 'Крокодил', emoji: '🐊', sound: 'грр-грр', file: 'sounds/animals_krokodyl.ogg' },
+          { name: 'Ленивец', emoji: '🦥', sound: 'ааа-аа', file: 'sounds/animals_leniwiec.ogg' },
+          { name: 'Лиса', emoji: '🦊', sound: 'тяф-тяф', file: 'sounds/animals_lis.ogg' },
+          { name: 'Носорог', emoji: '🦏', sound: 'гр-р-р', file: 'sounds/animals_nosorozec.ogg' },
+          { name: 'Орангутан', emoji: '🦧', sound: 'уаа-уаа', file: 'sounds/animals_orangutan.ogg' },
+          { name: 'Орёл', emoji: '🦅', sound: 'скри-и', file: 'sounds/animals_orzel.ogg' },
+          { name: 'Панда', emoji: '🐼', sound: 'хм-хм', file: 'sounds/animals_panda.ogg' },
+          { name: 'Пингвин', emoji: '🐧', sound: 'квок-квок', file: 'sounds/animals_pingwin.ogg' },
+          { name: 'Северный олень', emoji: '🦌', sound: 'и-и', file: 'sounds/animals_renifer.ogg' },
+          { name: 'Скунс', emoji: '🦨', sound: 'псс-псс', file: 'sounds/animals_skunks.ogg' },
+          { name: 'Фламинго', emoji: '🦩', sound: 'кря-кряк', file: 'sounds/animals_flaming.ogg' },
+          { name: 'Хомяк', emoji: '🐹', sound: 'пи-пи', file: 'sounds/animals_chomik.ogg' },
+          { name: 'Черепаха', emoji: '🐢', sound: 'шш-шш', file: 'sounds/animals_zolw.ogg' },
+          { name: 'Зебра', emoji: '🦓', sound: 'и-и-а', file: 'sounds/animals_zebra.ogg' }
         ]
       },
       {
         id: 'pets', name: 'Домашние животные', emoji: '🐱',
         items: [
-          { name: 'Кошка', emoji: '🐱', sound: 'мяу-мяу' },
-          { name: 'Собака', emoji: '🐶', sound: 'гав-гав' },
-          { name: 'Корова', emoji: '🐮', sound: 'му-у' },
-          { name: 'Коза', emoji: '🐐', sound: 'ме-е' },
-          { name: 'Овечка', emoji: '🐑', sound: 'бе-е' },
-          { name: 'Лошадка', emoji: '🐴', sound: 'и-го-го' },
-          { name: 'Петушок', emoji: '🐓', sound: 'ку-ка-ре-ку' },
-          { name: 'Курочка', emoji: '🐔', sound: 'ко-ко-ко' },
-          { name: 'Уточка', emoji: '🦆', sound: 'кря-кря' },
-          { name: 'Свинка', emoji: '🐷', sound: 'хрю-хрю' }
+          { name: 'Кошка', emoji: '🐱', sound: 'мяу-мяу', file: 'sounds/animals_kot.ogg' },
+          { name: 'Собака', emoji: '🐶', sound: 'гав-гав', file: 'sounds/animals_pies.ogg' },
+          { name: 'Корова', emoji: '🐮', sound: 'му-у', file: 'sounds/animals_krowa.ogg' },
+          { name: 'Коза', emoji: '🐐', sound: 'ме-е', file: 'sounds/animals_koza.ogg' },
+          { name: 'Овечка', emoji: '🐑', sound: 'бе-е', file: 'sounds/animals_owca.ogg' },
+          { name: 'Лошадка', emoji: '🐴', sound: 'и-го-го', file: 'sounds/animals_kon.ogg' },
+          { name: 'Петушок', emoji: '🐓', sound: 'ку-ка-ре-ку', file: 'sounds/animals_kogut.ogg' },
+          { name: 'Курочка', emoji: '🐔', sound: 'ко-ко-ко', file: 'sounds/animals_kura.ogg' },
+          { name: 'Уточка', emoji: '🦆', sound: 'кря-кря', file: 'sounds/animals_kaczka.ogg' },
+          { name: 'Свинка', emoji: '🐷', sound: 'хрю-хрю', file: 'sounds/animals_swinia.ogg' },
+          { name: 'Альпака', emoji: '🦙', sound: 'мэ-э', file: 'sounds/animals_alpaka.ogg' },
+          { name: 'Бык', emoji: '🐂', sound: 'му-у-у', file: 'sounds/animals_byk.ogg' },
+          { name: 'Индюк', emoji: '🦃', sound: 'кулдык-кулдык', file: 'sounds/animals_indyk.ogg' },
+          { name: 'Кролик', emoji: '🐰', sound: 'хрум-хрум', file: 'sounds/animals_krolik.ogg' },
+          { name: 'Лама', emoji: '🦙', sound: 'хек-хек', file: 'sounds/animals_lama.ogg' },
+          { name: 'Морская свинка', emoji: '🐹', sound: 'пи-пи-пи', file: 'sounds/animals_swinka_morska.ogg' },
+          { name: 'Ослик', emoji: '🫏', sound: 'и-а-и-а', file: 'sounds/animals_osiol.ogg' },
+          { name: 'Попугай', emoji: '🦜', sound: 'чика-рика', file: 'sounds/animals_papuga_falista.ogg' }
         ]
       },
       {
@@ -226,7 +259,7 @@ window.LM_DATA = {
           { name: 'Птички', emoji: '🐦', sound: 'synth:chirp' },
           { name: 'Шаги', emoji: '👟', sound: 'synth:steps' },
           { name: 'Автобус', emoji: '🚌', sound: 'synth:engine' },
-          { name: 'Лягушка', emoji: '🐸', sound: 'ква-ква' }
+          { name: 'Лягушка', emoji: '🐸', sound: 'ква-ква', file: 'sounds/animals_zaba.ogg' }
         ]
       },
       {
@@ -279,6 +312,50 @@ window.LM_DATA = {
           { name: 'Конфетти', emoji: '🎊', sound: 'synth:sparkle' },
           { name: 'Бубенцы', emoji: '🎁', sound: 'synth:jingle' },
           { name: 'Мишура', emoji: '✨', sound: 'шур-шур' }
+        ]
+      },
+      {
+        id: 'birds', name: 'Птицы', emoji: '🐦',
+        items: [
+          { name: 'Воробей', emoji: '🐦', sound: 'чик-чирик', file: 'sounds/animals_wrobel.ogg' },
+          { name: 'Сорока', emoji: '🐦‍⬛', sound: 'чик-р-р', file: 'sounds/animals_sroka.ogg' },
+          { name: 'Скворец', emoji: '🐦', sound: 'свис-свис', file: 'sounds/animals_szpak.ogg' },
+          { name: 'Синица', emoji: '🐦', sound: 'тинь-тинь', file: 'sounds/animals_sikora.ogg' },
+          { name: 'Снегирь', emoji: '🐦', sound: 'фю-фю', file: 'sounds/animals_gil.ogg' },
+          { name: 'Дятел', emoji: '🐦', sound: 'тук-тук-тук', file: 'sounds/animals_dzieciol.ogg' },
+          { name: 'Ворон', emoji: '🐦‍⬛', sound: 'кар-р-р', file: 'sounds/animals_kruk.ogg' },
+          { name: 'Кукушка', emoji: '🐦', sound: 'ку-ку', file: 'sounds/animals_kukulka.ogg' },
+          { name: 'Чайка', emoji: '🐦', sound: 'кри-кри', file: 'sounds/animals_mewa.ogg' },
+          { name: 'Голубь', emoji: '🕊️', sound: 'гру-гру', file: 'sounds/animals_golab.ogg' },
+          { name: 'Аист', emoji: '🕊️', sound: 'клок-клок', file: 'sounds/animals_bocian.ogg' },
+          { name: 'Лебедь', emoji: '🦢', sound: 'гру-гру', file: 'sounds/animals_labedz.ogg' }
+        ]
+      },
+      {
+        id: 'bugs', name: 'Насекомые', emoji: '🐞',
+        items: [
+          { name: 'Божья коровка', emoji: '🐞', sound: 'трз-трз', file: 'sounds/animals_biedronka.ogg' },
+          { name: 'Муравей', emoji: '🐜', sound: 'трд-трд', file: 'sounds/animals_mrowka.ogg' },
+          { name: 'Пчела', emoji: '🐝', sound: 'ж-ж-ж', file: 'sounds/animals_pszczola.ogg' },
+          { name: 'Шмель', emoji: '🐝', sound: 'ж-жжж', file: 'sounds/animals_trzmiel.ogg' },
+          { name: 'Бабочка', emoji: '🦋', sound: 'фыр-фыр', file: 'sounds/animals_motyl.ogg' },
+          { name: 'Кузнечик', emoji: '🦗', sound: 'цвир-цвир', file: 'sounds/animals_pasikonik.ogg' },
+          { name: 'Муха', emoji: '🪰', sound: 'ззз', file: 'sounds/animals_mucha.ogg' },
+          { name: 'Паук', emoji: '🕷️', sound: 'шш', file: 'sounds/animals_pajak.ogg' },
+          { name: 'Богомол', emoji: '🦗', sound: 'трз', file: 'sounds/animals_modliszka.ogg' }
+        ]
+      },
+      {
+        id: 'water', name: 'Водные жители', emoji: '🐬',
+        items: [
+          { name: 'Акула', emoji: '🦈', sound: 'вжж', file: 'sounds/animals_rekin.ogg' },
+          { name: 'Рыба', emoji: '🐟', sound: 'буль-буль', file: 'sounds/animals_ryba.ogg' },
+          { name: 'Косатка', emoji: '🐳', sound: 'у-у-у', file: 'sounds/animals_orka.ogg' },
+          { name: 'Медуза', emoji: '🪼', sound: 'плям', file: 'sounds/animals_meduza.ogg' },
+          { name: 'Осьминог', emoji: '🐙', sound: 'пфф', file: 'sounds/animals_osmiornica.ogg' },
+          { name: 'Тюлень', emoji: '🦭', sound: 'орр-орр', file: 'sounds/animals_foka.ogg' },
+          { name: 'Морж', emoji: '🦭', sound: 'оу-оу', file: 'sounds/animals_mors.ogg' },
+          { name: 'Белуга', emoji: '🐋', sound: 'пиу-у', file: 'sounds/animals_bieluga.ogg' }
         ]
       }
     ]
