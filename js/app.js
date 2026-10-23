@@ -125,10 +125,12 @@
     const mastered = masteredCount();
     screens.home.innerHTML = `
       <div class="hero">
-        <div class="hi">Привет${name}!</div>
-        <h1>Поговорим<br>сегодня?</h1>
-        <div class="sub">Лисёнок Ля и зверята помогут звукам зазвучать правильно.</div>
-        <span class="mascot wob">🦊</span>
+        <div class="txt">
+          <div class="hi">Привет${name}!</div>
+          <h1>Поговорим<br>сегодня?</h1>
+          <div class="sub">Лисёнок Ля и зверята помогут звукам зазвучать правильно.</div>
+        </div>
+        <img class="mascot-img wob" src="/assets/hero-fox.webp" alt="Лисёнок Ля">
       </div>
       <div class="sections">
         <div class="sec" data-go="library"><span class="ico">🔊</span><b>Звуки</b><small>библиотека звуков</small></div>
