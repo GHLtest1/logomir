@@ -218,28 +218,28 @@ window.LM_DATA = {
       {
         id: 'street', name: 'На улице', emoji: '🌧️',
         items: [
-          { name: 'Гроза', emoji: '⛈️', sound: 'бум-бам' },
-          { name: 'Дождик', emoji: '🌧️', sound: 'кап-кап' },
-          { name: 'Ветерок', emoji: '🍃', sound: 'у-у-у' },
-          { name: 'Машинка', emoji: '🚗', sound: 'би-би' },
-          { name: 'Сирена', emoji: '🚨', sound: 'у-и-у-и' },
-          { name: 'Птички', emoji: '🐦', sound: 'чик-чирик' },
-          { name: 'Шаги', emoji: '👟', sound: 'топ-топ' },
-          { name: 'Автобус', emoji: '🚌', sound: 'др-р-р' },
+          { name: 'Гроза', emoji: '⛈️', sound: 'synth:thunder' },
+          { name: 'Дождик', emoji: '🌧️', sound: 'synth:rain' },
+          { name: 'Ветерок', emoji: '🍃', sound: 'synth:wind' },
+          { name: 'Машинка', emoji: '🚗', sound: 'synth:horn' },
+          { name: 'Сирена', emoji: '🚨', sound: 'synth:siren' },
+          { name: 'Птички', emoji: '🐦', sound: 'synth:chirp' },
+          { name: 'Шаги', emoji: '👟', sound: 'synth:steps' },
+          { name: 'Автобус', emoji: '🚌', sound: 'synth:engine' },
           { name: 'Лягушка', emoji: '🐸', sound: 'ква-ква' }
         ]
       },
       {
         id: 'flat', name: 'В квартире', emoji: '🫖',
         items: [
-          { name: 'Часики', emoji: '🕰️', sound: 'тик-так' },
-          { name: 'Чайничек', emoji: '🫖', sound: 'пш-ш-ш' },
-          { name: 'Пылесос', emoji: '🧹', sound: 'вж-вж' },
-          { name: 'Стиралка', emoji: '🌀', sound: 'ж-ж-ж' },
-          { name: 'Звонок', emoji: '🔔', sound: 'динь-динь' },
-          { name: 'Телефон', emoji: '📞', sound: 'тр-р-р' },
-          { name: 'Дверца', emoji: '🚪', sound: 'скрип' },
-          { name: 'Холодильник', emoji: '🧊', sound: 'др-р-р' }
+          { name: 'Часики', emoji: '🕰️', sound: 'synth:ticktock' },
+          { name: 'Чайничек', emoji: '🫖', sound: 'synth:kettle' },
+          { name: 'Пылесос', emoji: '🧹', sound: 'synth:vacuum' },
+          { name: 'Стиралка', emoji: '🌀', sound: 'synth:washer' },
+          { name: 'Звонок', emoji: '🔔', sound: 'synth:dingdong' },
+          { name: 'Телефон', emoji: '📞', sound: 'synth:bphone' },
+          { name: 'Дверца', emoji: '🚪', sound: 'synth:squeak' },
+          { name: 'Холодильник', emoji: '🧊', sound: 'synth:fridge' }
         ]
       },
       {
@@ -258,12 +258,12 @@ window.LM_DATA = {
       {
         id: 'toys', name: 'Игрушки', emoji: '🧸',
         items: [
-          { name: 'Погремушка', emoji: '🪇', sound: 'трз-трз' },
-          { name: 'Паровозик', emoji: '🚂', sound: 'ту-ту' },
+          { name: 'Погремушка', emoji: '🪇', sound: 'synth:maracas' },
+          { name: 'Паровозик', emoji: '🚂', sound: 'synth:train' },
           { name: 'Кукла', emoji: '🧸', sound: 'ма-ма' },
-          { name: 'Мячик', emoji: '⚽', sound: 'тук-тук' },
-          { name: 'Машинка', emoji: '🚗', sound: 'би-би' },
-          { name: 'Пищалка', emoji: '🐥', sound: 'пи-пи' },
+          { name: 'Мячик', emoji: '⚽', sound: 'synth:bounce' },
+          { name: 'Машинка', emoji: '🚗', sound: 'synth:horn' },
+          { name: 'Пищалка', emoji: '🐥', sound: 'synth:chirp' },
           { name: 'Дудочка', emoji: '🪈', sound: 'synth:flute' },
           { name: 'Барабанчик', emoji: '🥁', sound: 'synth:drum' }
         ]
@@ -272,12 +272,12 @@ window.LM_DATA = {
         id: 'newyear', name: 'Новый год', emoji: '🎅',
         items: [
           { name: 'Дед Мороз', emoji: '🎅', sound: 'хо-хо-хо' },
-          { name: 'Фейерверк', emoji: '🎆', sound: 'бах-бах' },
+          { name: 'Фейерверк', emoji: '🎆', sound: 'synth:firework' },
           { name: 'Снежок', emoji: '❄️', sound: 'хруст-хруст' },
-          { name: 'Часы 12', emoji: '🕛', sound: 'бом-бом' },
-          { name: 'Колокольчик', emoji: '🔔', sound: 'динь-динь' },
-          { name: 'Конфетти', emoji: '🎊', sound: 'вжик-вжик' },
-          { name: 'Бубенцы', emoji: '🎁', sound: 'дзинь-дзинь' },
+          { name: 'Часы 12', emoji: '🕛', sound: 'synth:midnight' },
+          { name: 'Колокольчик', emoji: '🔔', sound: 'synth:bell' },
+          { name: 'Конфетти', emoji: '🎊', sound: 'synth:sparkle' },
+          { name: 'Бубенцы', emoji: '🎁', sound: 'synth:jingle' },
           { name: 'Мишура', emoji: '✨', sound: 'шур-шур' }
         ]
       }

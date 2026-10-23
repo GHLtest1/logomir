@@ -539,10 +539,66 @@
     const v = c.createGain(); v.gain.value = g;
     src.connect(fl); fl.connect(v); v.connect(c.destination); src.start(w);
   }
+  function sirenGen(w, dur, f1, f2, rate, g) {
+    const c = ensureAudio(); if (!c) return;
+    const o = c.createOscillator(); o.type = 'sawtooth';
+    const l = c.createOscillator(); l.frequency.value = rate || 0.6;
+    const lg = c.createGain(); lg.gain.value = (f2 - f1) / 2;
+    const base = c.createGain(); base.gain.value = (f1 + f2) / 2;
+    l.connect(lg); lg.connect(o.frequency); base.connect(o.frequency);
+    const v = c.createGain();
+    v.gain.setValueAtTime(0.0001, w);
+    v.gain.exponentialRampToValueAtTime(g, w + 0.05);
+    v.gain.setValueAtTime(g, w + 0.1);
+    v.gain.exponentialRampToValueAtTime(0.0001, w + dur);
+    o.connect(v); v.connect(c.destination);
+    o.start(w); o.stop(w + dur + 0.05); l.start(w); l.stop(w + dur + 0.05);
+  }
+  function windGen(w, dur, cut, g, rate) {
+    const c = ensureAudio(); if (!c) return;
+    const n = Math.floor(c.sampleRate * dur);
+    const buf = c.createBuffer(1, n, c.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1;
+    const src = c.createBufferSource(); src.buffer = buf;
+    const fl = c.createBiquadFilter(); fl.type = 'lowpass'; fl.frequency.value = cut || 800;
+    const l = c.createOscillator(); l.frequency.value = rate || 0.4;
+    const lg = c.createGain(); lg.gain.value = 0.35;
+    const m = c.createGain(); m.gain.value = 0.5;
+    l.connect(lg); lg.connect(m.gain);
+    const v = c.createGain(); v.gain.value = g;
+    src.connect(fl); fl.connect(m); m.connect(v); v.connect(c.destination);
+    src.start(w); src.stop(w + dur + 0.05); l.start(w); l.stop(w + dur + 0.05);
+  }
   function synth(key) {
     const c = ensureAudio(); if (!c) return false;
     const t = c.currentTime + 0.02;
     switch (key) {
+      case 'rain':
+        noiseBurst(2.6, 0.5, t, 6000);
+        for (let i = 0; i < 8; i++) tone(1700 + Math.random() * 1500, 'sine', 0.03, 0.06, t + Math.random() * 2.4);
+        break;
+      case 'wind': windGen(t, 2.6, 700, 0.6, 0.45); break;
+      case 'thunder': noiseBurst(3, 0.7, t, 160); tone(46, 'sine', 2.6, 0.8, t); tone(62, 'sine', 2.2, 0.5, t + 0.2); break;
+      case 'siren': sirenGen(t, 2.0, 560, 950, 0.7, 0.5); break;
+      case 'vacuum': noiseBurst(2.6, 0.6, t, 900); break;
+      case 'washer': tone(100, 'sine', 2.6, 0.4, t); noiseBurst(2.6, 0.3, t, 1400); break;
+      case 'fridge': tone(70, 'sine', 1.1, 0.32, t); tone(70, 'sine', 1.1, 0.3, t + 1.3); break;
+      case 'kettle': noiseBurst(2.6, 0.5, t, 5000); break;
+      case 'squeak': vtone(1300, 0.5, 0.3, t, 12, 'sine'); vtone(900, 0.5, 0.25, t + 0.3, 10, 'sine'); break;
+      case 'bphone': tone(420, 'square', 0.9, 0.3, t); tone(320, 'square', 0.9, 0.3, t + 1.1); break;
+      case 'ticktock': tone(2100, 'square', 0.03, 0.22, t); tone(2100, 'square', 0.03, 0.22, t + 0.5); tone(2100, 'square', 0.03, 0.22, t + 1.0); break;
+      case 'dingdong': tone(523, 'sine', 0.5, 0.3, t); tone(784, 'sine', 0.6, 0.3, t + 0.35); break;
+      case 'steps': for (let i = 0; i < 3; i++) tone(95, 'sine', 0.07, 0.45, t + i * 0.28); break;
+      case 'engine': tone(78, 'sawtooth', 1.6, 0.32, t); noiseBurst(1.6, 0.2, t, 500); break;
+      case 'horn': tone(392, 'square', 0.5, 0.3, t); tone(392, 'square', 0.5, 0.3, t + 0.7); break;
+      case 'train': noiseBurst(2, 0.25, t, 400); tone(500, 'sine', 1.2, 0.14, t); tone(700, 'sine', 1.2, 0.14, t); break;
+      case 'firework': noiseBurst(0.9, 0.5, t, 1400); tone(1600, 'sine', 0.6, 0.22, t + 0.15); tone(1200, 'sine', 0.7, 0.2, t + 0.3); break;
+      case 'jingle': tone(1568, 'sine', 0.6, 0.24, t); tone(2093, 'sine', 0.6, 0.2, t + 0.12); tone(1568, 'sine', 0.6, 0.2, t + 0.24); break;
+      case 'sparkle': tone(2000, 'sine', 0.2, 0.16, t); tone(2400, 'sine', 0.2, 0.14, t + 0.1); tone(2600, 'sine', 0.2, 0.13, t + 0.2); break;
+      case 'bounce': tone(500, 'sine', 0.12, 0.3, t); tone(400, 'sine', 0.12, 0.25, t + 0.12); tone(320, 'sine', 0.14, 0.2, t + 0.24); break;
+      case 'chirp': tone(3000, 'sine', 0.05, 0.15, t); tone(3400, 'sine', 0.05, 0.15, t + 0.07); tone(2800, 'sine', 0.06, 0.13, t + 0.14); tone(3200, 'sine', 0.05, 0.13, t + 0.2); break;
+      case 'midnight': for (let i = 0; i < 3; i++) tone(220, 'sine', 1.5, 0.35, t + i * 0.9); break;
       case 'drum':
         noiseBurst(0.16, 0.5, t, 200); tone(110, 'sine', 0.16, 0.5, t);
         noiseBurst(0.16, 0.4, t + 0.28, 200); tone(110, 'sine', 0.16, 0.4, t + 0.28);
