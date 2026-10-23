@@ -307,71 +307,56 @@
   // ---------- Рисунок-подсказка для каждого упражнения ----------
   function mouthSVG(type) {
     const F =
-      '<circle cx="110" cy="112" r="68" fill="#FFDFC4" stroke="#E8B98C" stroke-width="6"/>' +
-      '<circle cx="70" cy="118" r="12" fill="#F8C9A6" opacity="0.7"/>' +
-      '<circle cx="150" cy="118" r="12" fill="#F8C9A6" opacity="0.7"/>' +
-      '<circle cx="82" cy="90" r="7" fill="#3D2C2E"/><circle cx="138" cy="90" r="7" fill="#3D2C2E"/>' +
-      '<circle cx="84" cy="88" r="2.4" fill="#fff"/><circle cx="136" cy="88" r="2.4" fill="#fff"/>' +
-      '<path d="M76 82 q6 -6 12 0 M132 82 q6 -6 12 0" stroke="#C98A5C" stroke-width="3" fill="none" stroke-linecap="round"/>' +
-      '<path d="M100 99 Q110 94 120 99 Q123 112 110 114 Q98 112 100 99 Z" fill="#EFAE77" stroke="#D98A50" stroke-width="2"/>' +
-      '<path d="M105 105 q3 4 6 0" stroke="#C9793E" stroke-width="2" fill="none" stroke-linecap="round"/>';
-    const MOUTH =
-      '<path d="M60 140 Q110 98 160 140 Q110 178 60 140 Z" fill="#7A3B47" stroke="#5C2732" stroke-width="4"/>';
-    const TEETH =
-      '<rect x="80" y="128" width="12" height="16" rx="4" fill="#FFFDF5" stroke="#E3D4C0" stroke-width="2"/>' +
-      '<rect x="95" y="124" width="15" height="22" rx="4" fill="#FFFDF5" stroke="#E3D4C0" stroke-width="2"/>' +
-      '<rect x="114" y="124" width="15" height="22" rx="4" fill="#FFFDF5" stroke="#E3D4C0" stroke-width="2"/>' +
-      '<rect x="132" y="128" width="12" height="16" rx="4" fill="#FFFDF5" stroke="#E3D4C0" stroke-width="2"/>';
-    const ARG =
-      '<g stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round">';
+      '<circle cx="120" cy="122" r="100" fill="#FFE3CF" stroke="#F2BD95" stroke-width="6"/>' +
+      '<path d="M46 98 C 38 42, 202 42, 194 98 C 168 70, 72 70, 46 98 Z" fill="#7A4A38"/>' +
+      '<circle cx="72" cy="152" r="22" fill="#FFC7AE" opacity="0.55"/><circle cx="168" cy="152" r="22" fill="#FFC7AE" opacity="0.55"/>' +
+      '<circle cx="96" cy="128" r="11" fill="#3F3440"/><circle cx="144" cy="128" r="11" fill="#3F3440"/>' +
+      '<circle cx="99" cy="124" r="4" fill="#fff"/><circle cx="147" cy="124" r="4" fill="#fff"/>' +
+      '<circle cx="120" cy="144" r="8" fill="#F6BE96" stroke="#E8A67C" stroke-width="2"/>';
+    const MOUTH = '<ellipse cx="120" cy="186" rx="55" ry="33" fill="#B3566E" stroke="#8E4056" stroke-width="4"/>';
+    const ARG = '<g stroke="#6B5B66" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round">';
     let B = '';
     switch (type) {
       case 'gorka':
-        B = MOUTH + TEETH +
-          '<ellipse class="t-up" cx="110" cy="120" rx="33" ry="14" fill="#E15B5B"/>' +
-          ARG + '<path d="M110 100 V82 m-7 8 7 -8 7 8"/></g>';
+        B = MOUTH + '<ellipse class="t-up" cx="120" cy="170" rx="38" ry="13" fill="#E57383"/>' +
+          ARG + '<path d="M120 146 V128 m-8 8 8 -8 8 8"/></g>';
         break;
       case 'cha':
-        B = MOUTH + TEETH +
-          '<rect class="t-sid" x="58" y="136" width="104" height="20" rx="10" fill="#E15B5B" stroke="#C94A4A" stroke-width="3"/>' +
-          ARG + '<path d="M42 146 H26 m8 -7 0 14 -8 -7"/><path d="M178 146 h16 m-8 -7 0 14 8 -7"/></g>';
+        B = MOUTH + '<ellipse class="t-sid" cx="120" cy="230" rx="27" ry="18" fill="#E57383" stroke="#C94A64" stroke-width="3"/>' +
+          ARG + '<path d="M58 248 H38 m8 -7 0 14 -8 -7"/><path d="M182 248 h20 m-8 -7 0 14 8 -7"/></g>';
         break;
       case 'kacheli':
-        B = MOUTH + TEETH +
-          '<ellipse class="t-up" cx="110" cy="142" rx="37" ry="16" fill="#E15B5B"/>' +
-          ARG + '<path d="M74 156 v-22 m-7 10 7 -10 7 10"/><path d="M146 118 v22 m-7 -10 7 10 7 -10"/></g>';
+        B = MOUTH + '<ellipse class="t-up" cx="120" cy="192" rx="41" ry="16" fill="#E57383"/>' +
+          ARG + '<path d="M120 216 v26 m-9 -8 9 8 9 -8"/><path d="M120 158 V132 m-9 8 9 -8 9 8"/></g>';
         break;
       case 'zlob':
-        B = MOUTH + TEETH +
-          '<ellipse class="t-up" cx="110" cy="108" rx="31" ry="13" fill="#E15B5B"/>' +
-          ARG + '<path d="M110 76 V60 m-7 8 7 -8 7 8"/><path d="M58 78 l-12 -8 m-2 18 15 0"/><path d="M162 78 l12 -8 m2 18 -15 0"/></g>';
+        B = MOUTH + '<ellipse class="t-up" cx="120" cy="162" rx="42" ry="13" fill="#E57383"/>' +
+          ARG + '<path d="M120 138 V118 m-8 9 8 -9 8 9"/></g>';
         break;
       case 'tubka':
-        B = MOUTH + TEETH +
-          '<rect class="t-pulse" x="86" y="100" width="48" height="58" rx="24" fill="#E15B5B" stroke="#C94A4A" stroke-width="3"/>' +
-          '<ellipse cx="110" cy="138" rx="12" ry="17" fill="#7A3B47"/>' +
-          ARG + '<path d="M124 96 q16 4 10 18 M132 86 q22 8 14 30" stroke-width="3.5"/></g>';
+        B =
+          '<ellipse class="t-pulse" cx="120" cy="186" rx="34" ry="28" fill="#D98482" stroke="#B56E6C" stroke-width="4"/>' +
+          '<ellipse cx="120" cy="186" rx="15" ry="21" fill="#E57383"/>' +
+          ARG + '<path d="M120 148 V128 m-8 8 8 -8 8 8"/></g>';
         break;
       case 'bublik':
         B =
-          '<ellipse class="t-pulse" cx="110" cy="140" rx="42" ry="29" fill="#E88A73" stroke="#C95F4C" stroke-width="4"/>' +
-          '<ellipse cx="110" cy="140" rx="19" ry="12" fill="#7A3B47"/>' +
-          '<path d="M62 140 h-22 m7 -7 0 14 -7 -7 M158 140 h22 m-7 -7 0 14 7 -7" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
+          '<circle class="t-pulse" cx="120" cy="186" r="42" fill="#D98482" stroke="#B56E6C" stroke-width="4"/>' +
+          '<circle cx="120" cy="186" r="19" fill="#7B3B4E"/>' +
+          ARG + '<path d="M68 186 H48 m8 -7 0 14 -8 -7 M172 186 h20 m-8 -7 0 14 8 -7"/></g>';
         break;
       case 'kormit':
-        B = MOUTH + TEETH +
-          '<ellipse class="t-up" cx="110" cy="98" rx="42" ry="14" fill="#E15B5B"/>' +
-          ARG + '<path d="M110 76 V58 m-7 9 7 -9 7 9"/></g>';
+        B = MOUTH + '<ellipse class="t-up" cx="120" cy="150" rx="47" ry="15" fill="#E57383"/>' +
+          ARG + '<path d="M120 122 V102 m-8 9 8 -9 8 9"/></g>';
         break;
       case 'krepost':
-        B = MOUTH + TEETH +
-          '<rect class="t-pulse" x="70" y="124" width="80" height="30" rx="15" fill="#E15B5B" stroke="#C94A4A" stroke-width="3"/>' +
-          ARG + '<path d="M36 139 H58 m-7 -8 0 16 -7 -8 M184 139 h-22 m7 -8 0 16 7 -8"/></g>';
+        B = MOUTH + '<rect class="t-pulse" x="90" y="184" width="60" height="22" rx="11" fill="#E57383" stroke="#C94A64" stroke-width="3"/>' +
+          ARG + '<path d="M62 210 H42 m8 -7 0 14 -8 -7 M178 210 h20 m-8 -7 0 14 8 -7"/></g>';
         break;
       default:
-        B = MOUTH + TEETH;
+        B = MOUTH + '<ellipse cx="120" cy="190" rx="40" ry="16" fill="#E57383"/>';
     }
-    return '<svg viewBox="0 0 220 182" xmlns="http://www.w3.org/2000/svg">' + F + B + '</svg>';
+    return '<svg viewBox="0 0 240 262" xmlns="http://www.w3.org/2000/svg">' + F + B + '</svg>';
   }
 
   const ARTIMG = {
@@ -394,7 +379,7 @@
             <span id="chev-${a.id}" style="font-weight:800;color:var(--ink-soft)">▶</span>
           </div>
           <div id="body-${a.id}" class="arti-body" style="display:none">
-            <div class="demo"><img class="demo-img" src="assets/artic-${articImg(a.id)}.webp" alt="${esc(a.name)}"></div>
+            <div class="demo">${mouthSVG(a.id)}</div>
             <ol class="arti-steps">
               ${a.steps.map((s, i) => `<li><span class="num">${i + 1}</span><span>${esc(s)}</span></li>`).join('')}
             </ol>
