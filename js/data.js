@@ -165,5 +165,122 @@ window.LM_DATA = {
     { id: 'clock', emoji: '🕰️', name: 'Часики', sound: 'Тик-так' },
     { id: 'wind', emoji: '🍃', name: 'Ветерок', sound: 'У-у-у' },
     { id: 'drum', emoji: '🥁', name: 'Барабан', sound: 'Тум-тум' }
-  ]
+  ],
+
+  // ---------- БИБЛИОТЕКА ЗВУКОВ ----------
+  // sound: текст-звукоподражание (TTS) или 'synth:<ключ>' (Web Audio тон)
+  library: {
+    categories: [
+      {
+        id: 'wild', name: 'Дикие животные', emoji: '🦁',
+        items: [
+          { name: 'Волк', emoji: '🐺', sound: 'у-у-у' },
+          { name: 'Лев', emoji: '🦁', sound: 'р-р-р' },
+          { name: 'Тигрёнок', emoji: '🐯', sound: 'р-р-р' },
+          { name: 'Обезьянка', emoji: '🐵', sound: 'у-у-а-а' },
+          { name: 'Слон', emoji: '🐘', sound: 'тру-у' },
+          { name: 'Змейка', emoji: '🐍', sound: 'ш-ш-ш' },
+          { name: 'Совёнок', emoji: '🦉', sound: 'ух-ух' },
+          { name: 'Ворона', emoji: '🐦‍⬛', sound: 'кар-кар' },
+          { name: 'Медведь', emoji: '🐻', sound: 'ры-ы-ы' },
+          { name: 'Ёжик', emoji: '🦔', sound: 'фыр-фыр' }
+        ]
+      },
+      {
+        id: 'pets', name: 'Домашние животные', emoji: '🐱',
+        items: [
+          { name: 'Кошка', emoji: '🐱', sound: 'мяу-мяу' },
+          { name: 'Собака', emoji: '🐶', sound: 'гав-гав' },
+          { name: 'Корова', emoji: '🐮', sound: 'му-у' },
+          { name: 'Коза', emoji: '🐐', sound: 'ме-е' },
+          { name: 'Овечка', emoji: '🐑', sound: 'бе-е' },
+          { name: 'Лошадка', emoji: '🐴', sound: 'и-го-го' },
+          { name: 'Петушок', emoji: '🐓', sound: 'ку-ка-ре-ку' },
+          { name: 'Курочка', emoji: '🐔', sound: 'ко-ко-ко' },
+          { name: 'Уточка', emoji: '🦆', sound: 'кря-кря' },
+          { name: 'Свинка', emoji: '🐷', sound: 'хрю-хрю' }
+        ]
+      },
+      {
+        id: 'instr', name: 'Музыкальные инструменты', emoji: '🎺',
+        items: [
+          { name: 'Барабан', emoji: '🥁', sound: 'synth:drum' },
+          { name: 'Пианино', emoji: '🎹', sound: 'synth:piano' },
+          { name: 'Гитара', emoji: '🎸', sound: 'synth:guitar' },
+          { name: 'Скрипка', emoji: '🎻', sound: 'synth:violin' },
+          { name: 'Труба', emoji: '🎺', sound: 'synth:trumpet' },
+          { name: 'Флейта', emoji: '🪈', sound: 'synth:flute' },
+          { name: 'Колокольчик', emoji: '🔔', sound: 'synth:bell' },
+          { name: 'Гармошка', emoji: '🪗', sound: 'synth:harmonica' },
+          { name: 'Маракасы', emoji: '🪇', sound: 'synth:maracas' }
+        ]
+      },
+      {
+        id: 'street', name: 'На улице', emoji: '🌧️',
+        items: [
+          { name: 'Гроза', emoji: '⛈️', sound: 'бум-бам' },
+          { name: 'Дождик', emoji: '🌧️', sound: 'кап-кап' },
+          { name: 'Ветерок', emoji: '🍃', sound: 'у-у-у' },
+          { name: 'Машинка', emoji: '🚗', sound: 'би-би' },
+          { name: 'Сирена', emoji: '🚨', sound: 'у-и-у-и' },
+          { name: 'Птички', emoji: '🐦', sound: 'чик-чирик' },
+          { name: 'Шаги', emoji: '👟', sound: 'топ-топ' },
+          { name: 'Автобус', emoji: '🚌', sound: 'др-р-р' },
+          { name: 'Лягушка', emoji: '🐸', sound: 'ква-ква' }
+        ]
+      },
+      {
+        id: 'flat', name: 'В квартире', emoji: '🫖',
+        items: [
+          { name: 'Часики', emoji: '🕰️', sound: 'тик-так' },
+          { name: 'Чайничек', emoji: '🫖', sound: 'пш-ш-ш' },
+          { name: 'Пылесос', emoji: '🧹', sound: 'вж-вж' },
+          { name: 'Стиралка', emoji: '🌀', sound: 'ж-ж-ж' },
+          { name: 'Звонок', emoji: '🔔', sound: 'динь-динь' },
+          { name: 'Телефон', emoji: '📞', sound: 'тр-р-р' },
+          { name: 'Дверца', emoji: '🚪', sound: 'скрип' },
+          { name: 'Холодильник', emoji: '🧊', sound: 'др-р-р' }
+        ]
+      },
+      {
+        id: 'people', name: 'Звуки человека', emoji: '😂',
+        items: [
+          { name: 'Смех', emoji: '😂', sound: 'ха-ха-ха' },
+          { name: 'Чихание', emoji: '🤧', sound: 'апчхи' },
+          { name: 'Хлопки', emoji: '👏', sound: 'хлоп-хлоп' },
+          { name: 'Песенка', emoji: '🎤', sound: 'ля-ля-ля' },
+          { name: 'Свист', emoji: '😗', sound: 'фью-фью' },
+          { name: 'Шёпот', emoji: '🤫', sound: 'ш-ш-ш' },
+          { name: 'Слёзки', emoji: '😢', sound: 'уа-а' },
+          { name: 'Поцелуйчик', emoji: '😘', sound: 'чмок' }
+        ]
+      },
+      {
+        id: 'toys', name: 'Игрушки', emoji: '🧸',
+        items: [
+          { name: 'Погремушка', emoji: '🪇', sound: 'трз-трз' },
+          { name: 'Паровозик', emoji: '🚂', sound: 'ту-ту' },
+          { name: 'Кукла', emoji: '🧸', sound: 'ма-ма' },
+          { name: 'Мячик', emoji: '⚽', sound: 'тук-тук' },
+          { name: 'Машинка', emoji: '🚗', sound: 'би-би' },
+          { name: 'Пищалка', emoji: '🐥', sound: 'пи-пи' },
+          { name: 'Дудочка', emoji: '🪈', sound: 'synth:flute' },
+          { name: 'Барабанчик', emoji: '🥁', sound: 'synth:drum' }
+        ]
+      },
+      {
+        id: 'newyear', name: 'Новый год', emoji: '🎅',
+        items: [
+          { name: 'Дед Мороз', emoji: '🎅', sound: 'хо-хо-хо' },
+          { name: 'Фейерверк', emoji: '🎆', sound: 'бах-бах' },
+          { name: 'Снежок', emoji: '❄️', sound: 'хруст-хруст' },
+          { name: 'Часы 12', emoji: '🕛', sound: 'бом-бом' },
+          { name: 'Колокольчик', emoji: '🔔', sound: 'динь-динь' },
+          { name: 'Конфетти', emoji: '🎊', sound: 'вжик-вжик' },
+          { name: 'Бубенцы', emoji: '🎁', sound: 'дзинь-дзинь' },
+          { name: 'Мишура', emoji: '✨', sound: 'шур-шур' }
+        ]
+      }
+    ]
+  }
 };

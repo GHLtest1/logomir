@@ -17,10 +17,14 @@
           <small>говорим играя</small>
         </span>
       </div>
-      <button class="chip" id="nameChip">👶 Настроить</button>
+      <span style="display:flex;gap:8px">
+        <button class="chip" id="progChip">⭐</button>
+        <button class="chip" id="nameChip">👶 Настроить</button>
+      </span>
     </header>
 
     <section class="screen active" id="scr-home"></section>
+    <section class="screen" id="scr-library"></section>
     <section class="screen" id="scr-sounds"></section>
     <section class="screen" id="scr-sound"></section>
     <section class="screen" id="scr-artic"></section>
@@ -30,10 +34,10 @@
 
   <nav class="nav" id="nav">
     <button data-nav="home"><span class="i">🏠</span>Главная</button>
-    <button data-nav="sounds"><span class="i">🔊</span>Звуки</button>
+    <button data-nav="library"><span class="i">🔊</span>Звуки</button>
+    <button data-nav="sounds"><span class="i">🗣️</span>Проработка</button>
     <button data-nav="artic"><span class="i">😝</span>Гимнастика</button>
-    <button data-nav="play"><span class="i">🦆</span>Играем</button>
-    <button data-nav="progress"><span class="i">⭐</span>Рост</button>
+    <button data-nav="play"><span class="i">🦆</span>Кто говорит</button>
   </nav>
 
   <script src="js/data.js"></script>

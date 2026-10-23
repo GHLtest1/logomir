@@ -31,12 +31,18 @@
   const state = {
     nav: 'home',
     soundId: null, stage: 'syllables', i: 0,
-    playId: null
+    playId: null,
+    libTab: 'cats',
+    libCat: null,
+    gameCat: null,
+    gameRound: null,
+    gamePicks: { correct: 0, wrong: 0 }
   };
 
   const screens = {
     home: $('#scr-home'), sounds: $('#scr-sounds'), sound: $('#scr-sound'),
-    artic: $('#scr-artic'), play: $('#scr-play'), progress: $('#scr-progress')
+    artic: $('#scr-artic'), play: $('#scr-play'), progress: $('#scr-progress'),
+    library: $('#scr-library')
   };
 
   // ---------- Озвучка ----------
@@ -125,10 +131,10 @@
         <span class="mascot wob">🦊</span>
       </div>
       <div class="sections">
-        <div class="sec" data-go="sounds"><span class="ico">🔊</span><b>Учим звуки</b><small>слоги, слова, фразы</small></div>
+        <div class="sec" data-go="library"><span class="ico">🔊</span><b>Звуки</b><small>библиотека звуков</small></div>
+        <div class="sec" data-go="sounds"><span class="ico">🗣️</span><b>Проработка</b><small>слоги, слова, фразы</small></div>
         <div class="sec" data-go="artic"><span class="ico">😝</span><b>Гимнастика</b><small>язычок-силач</small></div>
         <div class="sec" data-go="play"><span class="ico">🦆</span><b>Кто говорит?</b><small>запуск речи</small></div>
-        <div class="sec" data-go="progress"><span class="ico">⭐</span><b>Наши успехи</b><small>для родителей</small></div>
       </div>
       ${sessions || mastered ? `
       <div class="card" style="margin-top:14px">
@@ -298,74 +304,71 @@
   // ---------- Рисунок-подсказка для каждого упражнения ----------
   function mouthSVG(type) {
     const F =
-      '<circle cx="110" cy="118" r="84" fill="#FFDFC4" stroke="#E8B98C" stroke-width="6"/>' +
-      '<circle cx="79" cy="96" r="6.5" fill="#3D2C2E"/><circle cx="141" cy="96" r="6.5" fill="#3D2C2E"/>' +
-      '<circle cx="82" cy="94" r="2" fill="#fff"/><circle cx="138" cy="94" r="2" fill="#fff"/>';
-    const S =
-      '<style>@keyframes ud{0%,100%{transform:translateY(-7px)}50%{transform:translateY(7px)}}' +
-      '@keyframes lr{0%,100%{transform:translateX(-9px)}50%{transform:translateX(9px)}}' +
-      '@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}' +
-      '@keyframes spin{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}</style>';
+      '<circle cx="110" cy="112" r="68" fill="#FFDFC4" stroke="#E8B98C" stroke-width="6"/>' +
+      '<circle cx="70" cy="118" r="12" fill="#F8C9A6" opacity="0.7"/>' +
+      '<circle cx="150" cy="118" r="12" fill="#F8C9A6" opacity="0.7"/>' +
+      '<circle cx="82" cy="90" r="7" fill="#3D2C2E"/><circle cx="138" cy="90" r="7" fill="#3D2C2E"/>' +
+      '<circle cx="84" cy="88" r="2.4" fill="#fff"/><circle cx="136" cy="88" r="2.4" fill="#fff"/>' +
+      '<path d="M76 82 q6 -6 12 0 M132 82 q6 -6 12 0" stroke="#C98A5C" stroke-width="3" fill="none" stroke-linecap="round"/>' +
+      '<path d="M100 99 Q110 94 120 99 Q123 112 110 114 Q98 112 100 99 Z" fill="#EFAE77" stroke="#D98A50" stroke-width="2"/>' +
+      '<path d="M105 105 q3 4 6 0" stroke="#C9793E" stroke-width="2" fill="none" stroke-linecap="round"/>';
+    const MOUTH =
+      '<path d="M60 140 Q110 98 160 140 Q110 178 60 140 Z" fill="#7A3B47" stroke="#5C2732" stroke-width="4"/>';
+    const TEETH =
+      '<rect x="80" y="128" width="12" height="16" rx="4" fill="#FFFDF5" stroke="#E3D4C0" stroke-width="2"/>' +
+      '<rect x="95" y="124" width="15" height="22" rx="4" fill="#FFFDF5" stroke="#E3D4C0" stroke-width="2"/>' +
+      '<rect x="114" y="124" width="15" height="22" rx="4" fill="#FFFDF5" stroke="#E3D4C0" stroke-width="2"/>' +
+      '<rect x="132" y="128" width="12" height="16" rx="4" fill="#FFFDF5" stroke="#E3D4C0" stroke-width="2"/>';
+    const ARG =
+      '<g stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round">';
     let B = '';
     switch (type) {
       case 'gorka':
-        B =
-          '<ellipse cx="110" cy="142" rx="46" ry="26" fill="#8A4A57" stroke="#6E3542" stroke-width="4"/>' +
-          '<ellipse class="ud" cx="110" cy="112" rx="32" ry="14" fill="#E15B5B"/>' +
-          '<path d="M110 92 V74 m-8 8 8-8 8 8" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
+        B = MOUTH + TEETH +
+          '<ellipse class="t-up" cx="110" cy="120" rx="33" ry="14" fill="#E15B5B"/>' +
+          ARG + '<path d="M110 100 V82 m-7 8 7 -8 7 8"/></g>';
         break;
       case 'cha':
-        B =
-          '<ellipse cx="110" cy="142" rx="46" ry="26" fill="#8A4A57" stroke="#6E3542" stroke-width="4"/>' +
-          '<rect class="lr" x="62" y="130" width="96" height="22" rx="11" fill="#E15B5B" stroke="#C94A4A" stroke-width="3"/>' +
-          '<path d="M52 141 H34 m8 -8 0 16 -8 -8" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
-          '<path d="M168 141 h18 m-8 -8 0 16 8 -8" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
+        B = MOUTH + TEETH +
+          '<rect class="t-sid" x="58" y="136" width="104" height="20" rx="10" fill="#E15B5B" stroke="#C94A4A" stroke-width="3"/>' +
+          ARG + '<path d="M42 146 H26 m8 -7 0 14 -8 -7"/><path d="M178 146 h16 m-8 -7 0 14 8 -7"/></g>';
         break;
       case 'kacheli':
-        B =
-          '<ellipse cx="110" cy="142" rx="46" ry="26" fill="#8A4A57" stroke="#6E3542" stroke-width="4"/>' +
-          '<ellipse class="ud" cx="110" cy="140" rx="34" ry="15" fill="#E15B5B"/>' +
-          '<path d="M72 152 v-18 m-7 8 7 -8 7 8" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
-          '<path d="M148 152 v-18 m-7 8 7 -8 7 8" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
+        B = MOUTH + TEETH +
+          '<ellipse class="t-up" cx="110" cy="142" rx="37" ry="16" fill="#E15B5B"/>' +
+          ARG + '<path d="M74 156 v-22 m-7 10 7 -10 7 10"/><path d="M146 118 v22 m-7 -10 7 10 7 -10"/></g>';
         break;
       case 'zlob':
-        B =
-          '<ellipse class="ud" cx="110" cy="100" rx="30" ry="14" fill="#E15B5B"/>' +
-          '<ellipse cx="110" cy="142" rx="46" ry="26" fill="#8A4A57" stroke="#6E3542" stroke-width="4"/>' +
-          '<path d="M110 74 V60 m-7 7 7 -7 7 7" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
-          '<path d="M66 74 l-10 -6 m-2 16 12 0" stroke="#3D2C2E" stroke-width="4" fill="none" stroke-linecap="round"/>' +
-          '<path d="M154 74 l10 -6 m2 16 -12 0" stroke="#3D2C2E" stroke-width="4" fill="none" stroke-linecap="round"/>';
+        B = MOUTH + TEETH +
+          '<ellipse class="t-up" cx="110" cy="108" rx="31" ry="13" fill="#E15B5B"/>' +
+          ARG + '<path d="M110 76 V60 m-7 8 7 -8 7 8"/><path d="M58 78 l-12 -8 m-2 18 15 0"/><path d="M162 78 l12 -8 m2 18 -15 0"/></g>';
         break;
       case 'tubka':
-        B =
-          '<path d="M96 122 C112 150 128 150 144 122 L138 112 C122 128 118 128 102 112 Z" fill="#E15B5B" stroke="#C94A4A" stroke-width="3"/>' +
-          '<ellipse cx="144" cy="122" rx="7" ry="12" fill="#F05B5B"/>' +
-          '<ellipse cx="110" cy="138" rx="40" ry="20" fill="#8A4A57" stroke="#6E3542" stroke-width="4"/>' +
-          '<path d="M150 106 c8 -10 14 -4 8 5 M148 112 c10 -8 16 -2 8 6" stroke="#3D2C2E" stroke-width="3" fill="none" stroke-linecap="round"/>';
+        B = MOUTH + TEETH +
+          '<rect class="t-pulse" x="86" y="100" width="48" height="58" rx="24" fill="#E15B5B" stroke="#C94A4A" stroke-width="3"/>' +
+          '<ellipse cx="110" cy="138" rx="12" ry="17" fill="#7A3B47"/>' +
+          ARG + '<path d="M124 96 q16 4 10 18 M132 86 q22 8 14 30" stroke-width="3.5"/></g>';
         break;
       case 'bublik':
         B =
-          '<circle cx="110" cy="138" r="34" fill="#C94A4A" stroke="#8A4A57" stroke-width="4"/>' +
-          '<circle cx="110" cy="138" r="16" fill="#FFDFC4"/>' +
-          '<path class="spin" d="M160 118 a26 26 0 1 1 -20 -34" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round"/>';
+          '<ellipse class="t-pulse" cx="110" cy="140" rx="42" ry="29" fill="#E88A73" stroke="#C95F4C" stroke-width="4"/>' +
+          '<ellipse cx="110" cy="140" rx="19" ry="12" fill="#7A3B47"/>' +
+          '<path d="M62 140 h-22 m7 -7 0 14 -7 -7 M158 140 h22 m-7 -7 0 14 7 -7" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
         break;
       case 'kormit':
-        B =
-          '<ellipse cx="110" cy="142" rx="46" ry="26" fill="#8A4A57" stroke="#6E3542" stroke-width="4"/>' +
-          '<ellipse class="ud" cx="110" cy="106" rx="40" ry="16" fill="#E15B5B"/>' +
-          '<path d="M110 78 V62 m-8 8 8 -8 8 8" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
+        B = MOUTH + TEETH +
+          '<ellipse class="t-up" cx="110" cy="98" rx="42" ry="14" fill="#E15B5B"/>' +
+          ARG + '<path d="M110 76 V58 m-7 9 7 -9 7 9"/></g>';
         break;
       case 'krepost':
-        B =
-          '<ellipse cx="110" cy="142" rx="46" ry="26" fill="#8A4A57" stroke="#6E3542" stroke-width="4"/>' +
-          '<rect class="pulse" x="78" y="128" width="64" height="26" rx="13" fill="#E15B5B" stroke="#C94A4A" stroke-width="3"/>' +
-          '<path d="M52 141 H70 m-6 -7 0 14 -6 -7" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
-          '<path d="M168 141 h-18 m6 -7 0 14 6 -7" stroke="#3D2C2E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
+        B = MOUTH + TEETH +
+          '<rect class="t-pulse" x="70" y="124" width="80" height="30" rx="15" fill="#E15B5B" stroke="#C94A4A" stroke-width="3"/>' +
+          ARG + '<path d="M36 139 H58 m-7 -8 0 16 -7 -8 M184 139 h-22 m7 -8 0 16 7 -8"/></g>';
         break;
       default:
-        B = '<ellipse cx="110" cy="140" rx="46" ry="26" fill="#8A4A57" stroke="#6E3542" stroke-width="4"/>';
+        B = MOUTH + TEETH;
     }
-    return '<svg viewBox="0 0 220 172" xmlns="http://www.w3.org/2000/svg">' + F + B + S + '</svg>';
+    return '<svg viewBox="0 0 220 182" xmlns="http://www.w3.org/2000/svg">' + F + B + '</svg>';
   }
 
   function renderArtic() {
@@ -494,6 +497,216 @@
     `;
   }
 
+  // ---------- Озвучка звуков (TTS + Web Audio) ----------
+  let audioCtx = null;
+  function ensureAudio() {
+    if (!audioCtx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) { try { audioCtx = new AC(); } catch (e) { audioCtx = null; } }
+    }
+    if (audioCtx && audioCtx.state === 'suspended') { try { audioCtx.resume(); } catch (e) {} }
+    return audioCtx;
+  }
+  function tone(f, type, dur, g, w) {
+    const c = ensureAudio(); if (!c) return;
+    const o = c.createOscillator(), v = c.createGain();
+    o.type = type; o.frequency.value = f;
+    v.gain.setValueAtTime(0.0001, w);
+    v.gain.exponentialRampToValueAtTime(g, w + 0.02);
+    v.gain.exponentialRampToValueAtTime(0.0001, w + dur);
+    o.connect(v); v.connect(c.destination); o.start(w); o.stop(w + dur + 0.05);
+  }
+  function vtone(f, dur, g, w, rate, type) {
+    const c = ensureAudio(); if (!c) return;
+    const o = c.createOscillator(), l = c.createOscillator(), lg = c.createGain(), v = c.createGain();
+    o.type = type || 'sawtooth'; o.frequency.value = f;
+    l.frequency.value = rate || 6; lg.gain.value = 6; l.connect(lg); lg.connect(o.frequency);
+    v.gain.setValueAtTime(0.0001, w);
+    v.gain.exponentialRampToValueAtTime(g, w + 0.05);
+    v.gain.setValueAtTime(g, w + 0.12);
+    v.gain.exponentialRampToValueAtTime(0.0001, w + dur);
+    o.connect(v); v.connect(c.destination); o.start(w); o.stop(w + dur + 0.05);
+    l.start(w); l.stop(w + dur + 0.05);
+  }
+  function noiseBurst(dur, g, w, cut) {
+    const c = ensureAudio(); if (!c) return;
+    const n = Math.floor(c.sampleRate * dur);
+    const buf = c.createBuffer(1, n, c.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n);
+    const src = c.createBufferSource(); src.buffer = buf;
+    const fl = c.createBiquadFilter(); fl.type = 'lowpass'; fl.frequency.value = cut || 1200;
+    const v = c.createGain(); v.gain.value = g;
+    src.connect(fl); fl.connect(v); v.connect(c.destination); src.start(w);
+  }
+  function synth(key) {
+    const c = ensureAudio(); if (!c) return false;
+    const t = c.currentTime + 0.02;
+    switch (key) {
+      case 'drum':
+        noiseBurst(0.16, 0.5, t, 200); tone(110, 'sine', 0.16, 0.5, t);
+        noiseBurst(0.16, 0.4, t + 0.28, 200); tone(110, 'sine', 0.16, 0.4, t + 0.28);
+        break;
+      case 'piano':
+        tone(523, 'triangle', 0.7, 0.30, t); tone(659, 'triangle', 0.7, 0.30, t + 0.1); tone(784, 'triangle', 0.8, 0.30, t + 0.2);
+        break;
+      case 'guitar':
+        tone(196, 'sawtooth', 0.4, 0.22, t); tone(294, 'sawtooth', 0.4, 0.22, t + 0.12); tone(329, 'sawtooth', 0.45, 0.2, t + 0.24);
+        break;
+      case 'violin':
+        vtone(440, 1.0, 0.28, t, 6, 'sawtooth'); vtone(659, 1.0, 0.18, t, 6, 'sawtooth');
+        break;
+      case 'trumpet':
+        tone(466, 'sawtooth', 0.7, 0.26, t); tone(466, 'square', 0.7, 0.14, t); tone(698, 'sawtooth', 0.7, 0.22, t + 0.12);
+        break;
+      case 'flute':
+        tone(784, 'sine', 0.5, 0.22, t); tone(880, 'sine', 0.5, 0.22, t + 0.06); tone(988, 'sine', 0.55, 0.2, t + 0.12);
+        break;
+      case 'bell':
+        [1, 2.7, 5.4].forEach((m, i) => tone(1046 * m, 'sine', 1.2, 0.22 / (i + 1), t));
+        break;
+      case 'harmonica':
+        tone(392, 'square', 0.6, 0.16, t); tone(392, 'square', 0.6, 0.16, t + 0.25); tone(523, 'square', 0.6, 0.18, t + 0.5);
+        break;
+      case 'maracas':
+        noiseBurst(0.07, 0.4, t, 4000); noiseBurst(0.07, 0.4, t + 0.18, 4000); noiseBurst(0.07, 0.4, t + 0.36, 4000);
+        break;
+      default:
+        return false;
+    }
+    return true;
+  }
+  function playLibSound(item) {
+    const s = item && item.sound;
+    if (s && s.indexOf('synth:') === 0) return synth(s.slice(6));
+    return speak(s || (item && item.name) || '');
+  }
+
+  // ---------- БИБЛИОТЕКА ЗВУКОВ ----------
+  function libStats() { try { const r = localStorage.getItem('logomir_lib'); return r ? JSON.parse(r) : {}; } catch (e) { return {}; } }
+  function saveLib(st) { try { localStorage.setItem('logomir_lib', JSON.stringify(st)); } catch (e) {} }
+  function catById(id) { return D.library.categories.find(c => c.id === id); }
+  function shuffle(a) { const r = a.slice(); for (let i = r.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = r[i]; r[i] = r[j]; r[j] = t; } return r; }
+
+  function renderLibrary() {
+    const onCats = state.libTab !== 'games';
+    screens.library.innerHTML = `
+      <div class="seg">
+        <button class="seg-btn ${onCats ? 'on' : ''}" id="segCats">🔊 Звуки</button>
+        <button class="seg-btn ${!onCats ? 'on' : ''}" id="segGames">🎮 Игры</button>
+      </div>
+      <div id="libBody"></div>`;
+    $('#segCats', screens.library).onclick = () => { state.libTab = 'cats'; state.libCat = null; state.gameCat = null; state.gameRound = null; renderLibrary(); };
+    $('#segGames', screens.library).onclick = () => { state.libTab = 'games'; state.libCat = null; state.gameCat = null; state.gameRound = null; renderLibrary(); };
+    renderLibBody();
+  }
+  function renderLibBody() {
+    const body = $('#libBody', screens.library);
+    if (!body) return;
+    if (state.libTab === 'games') {
+      if (state.gameRound) { renderGame(body); return; }
+      renderGameCats(body);
+    } else {
+      if (state.libCat) { renderLibItems(body); return; }
+      renderLibCats(body);
+    }
+  }
+  function renderLibCats(body) {
+    body.innerHTML = `<div class="lib-note">Выбери раздел и нажимай на картинку — услышишь, как она звучит.</div>
+      <div class="cat-grid">
+        ${D.library.categories.map(c => `<button class="cat-card" data-cat="${c.id}"><span class="ico">${c.emoji}</span><b>${esc(c.name)}</b></button>`).join('')}
+      </div>`;
+    $$('.cat-card', body).forEach(b => b.onclick = () => { state.libCat = b.dataset.cat; renderLibBody(); });
+  }
+  function renderLibItems(body) {
+    const cat = catById(state.libCat);
+    if (!cat) { state.libCat = null; renderLibBody(); return; }
+    body.innerHTML = `
+      <div class="backrow"><button class="btn back" id="libBack">‹</button><span class="crumb">${esc(cat.name)}</span></div>
+      <div class="lib-grid">
+        ${cat.items.map((it, i) => `<button class="lib-item" data-i="${i}"><span class="art">${it.emoji}</span><span class="t">${esc(it.name)}</span></button>`).join('')}
+      </div>`;
+    $('#libBack', body).onclick = () => { state.libCat = null; renderLibBody(); };
+    $$('.lib-item', body).forEach(b => b.onclick = () => { const it = cat.items[+b.dataset.i]; if (it) playLibSound(it); });
+  }
+
+  // Игра «угадай звук»
+  function pickWeighted(cat, items, st) {
+    const ws = items.map(it => { const s = (st[cat.id] && st[cat.id][it.name]) || { c: 0, w: 0 }; return Math.max(0.6, 1 + s.w - s.c); });
+    const total = ws.reduce((a, b) => a + b, 0);
+    let r = Math.random() * total;
+    for (let i = 0; i < items.length; i++) { r -= ws[i]; if (r <= 0) return items[i]; }
+    return items[0];
+  }
+  function newRound(cat) {
+    const st = libStats();
+    const target = pickWeighted(cat, cat.items, st);
+    const others = cat.items.filter(it => it !== target);
+    const picked = [];
+    const pool = others.slice();
+    while (picked.length < 3 && pool.length) {
+      const item = pickWeighted(cat, pool, st);
+      picked.push(item); pool.splice(pool.indexOf(item), 1);
+    }
+    return { cat: cat, target: target, options: shuffle([target].concat(picked)) };
+  }
+  function bump(cat, item, ok) {
+    const st = libStats();
+    st[cat.id] = st[cat.id] || {};
+    const s = st[cat.id][item.name] = st[cat.id][item.name] || { c: 0, w: 0 };
+    if (ok) s.c++; else s.w++;
+    saveLib(st);
+  }
+  function renderGameCats(body) {
+    body.innerHTML = `<div class="lib-note">Выбери категорию. Я сыграю звук — угадай, что звучало, по картинкам.</div>
+      <div class="cat-grid">
+        ${D.library.categories.map(c => `<button class="cat-card" data-cat="${c.id}"><span class="ico">${c.emoji}</span><b>${esc(c.name)}</b></button>`).join('')}
+      </div>`;
+    $$('.cat-card', body).forEach(b => b.onclick = () => {
+      state.gameCat = b.dataset.cat;
+      state.gamePicks = { correct: 0, wrong: 0 };
+      state.gameRound = newRound(catById(b.dataset.cat));
+      renderLibBody();
+    });
+  }
+  function renderGame(body) {
+    const r = state.gameRound;
+    if (!r) { state.gameRound = null; renderLibBody(); return; }
+    const p = state.gamePicks;
+    body.innerHTML = `
+      <div class="backrow">
+        <button class="btn back" id="gExit">‹</button>
+        <span class="crumb">Угадай: ${esc(r.cat.name)}</span>
+      </div>
+      <div class="game-card">
+        <div class="score">Верно: <b>${p.correct}</b> · Промахов: <b>${p.wrong}</b></div>
+        <div class="game-hint">Слушай и нажимай на картинку</div>
+        <button class="btn-speak big" id="gPlay">🔊</button>
+      </div>
+      <div class="game-grid">
+        ${r.options.map((it, idx) => `<button class="game-opt" data-o="${idx}"><span class="art">${it.emoji}</span><span class="t">${esc(it.name)}</span></button>`).join('')}
+      </div>
+      <div class="ctrl" style="margin-top:14px">
+        <button class="btn again" id="gNext">Дальше ›</button>
+      </div>`;
+    playLibSound(r.target);
+    $('#gPlay', body).onclick = () => playLibSound(r.target);
+    $('#gExit', body).onclick = () => { state.gameCat = null; state.gameRound = null; renderLibBody(); };
+    $('#gNext', body).onclick = () => { state.gameRound = newRound(r.cat); renderLibBody(); };
+    $$('.game-opt', body).forEach(b => b.onclick = () => {
+      const chosen = r.options[+b.dataset.o];
+      if (b.classList.contains('locked')) return;
+      if (chosen === r.target) {
+        b.classList.add('ok', 'locked');
+        p.correct++; bump(r.cat, r.target, 1); burst();
+        setTimeout(() => { state.gameRound = newRound(r.cat); renderLibBody(); }, 1100);
+      } else {
+        b.classList.add('no', 'locked');
+        p.wrong++; bump(r.cat, chosen, 0);
+      }
+    });
+  }
+
   // ---------- Имя ребёнка ----------
   function askName() {
     const p = store();
@@ -513,6 +726,7 @@
   // ---------- Инициализация ----------
   function render() {
     if (state.nav === 'home') renderHome();
+    else if (state.nav === 'library') renderLibrary();
     else if (state.nav === 'sounds') renderSounds();
     else if (state.nav === 'sound') renderSound();
     else if (state.nav === 'artic') renderArtic();
@@ -522,6 +736,7 @@
 
   $$('#nav button').forEach(b => b.onclick = () => navigate(b.dataset.nav));
   $('#nameChip').onclick = askName;
+  $('#progChip').onclick = () => navigate('progress');
   updateChip();
   navigate('home');
 })();
