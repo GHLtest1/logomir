@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <rect width="256" height="256" rx="64" fill="#FFD166"/>
+  <circle cx="128" cy="120" r="74" fill="#FF8B6E"/>
+  <circle cx="102" cy="104" r="9" fill="#3D2C2E"/>
+  <circle cx="154" cy="104" r="9" fill="#3D2C2E"/>
+  <circle cx="108" cy="104" r="3" fill="#fff"/>
+  <circle cx="148" cy="104" r="3" fill="#fff"/>
+  <path d="M110 136 q18 16 36 0" stroke="#3D2C2E" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M128 118 l4 10 -4 0 z" fill="#3D2C2E"/>
+  <rect x="150" y="52" rx="14" width="52" height="40" fill="#FBF3E4" transform="rotate(-8 176 72)"/>
+  <text x="182" y="82" font-family="Comic Sans MS, cursive" font-size="26" font-weight="bold" fill="#3D2C2E" text-anchor="middle">Лг</text>
+</svg>

@@ -1,0 +1,312 @@
+/* ============================================================
+   ЛогоЗверята — игрушечный мобильный стиль
+   ============================================================ */
+:root {
+  --bg: #FFF7E8;
+  --bg-2: #FFEFD6;
+  --card: #FFFDF7;
+  --ink: #3D2C2E;
+  --ink-soft: #6E5A5C;
+  --line: #EEDFC4;
+  --accent: #FF8B6E;
+  --accent-2: #F4A340;
+  --green: #7ECB5C;
+  --blue: #6FA8DC;
+  --shadow: 0 6px 0 rgba(61, 44, 46, 0.16);
+  --shadow-sm: 0 3px 0 rgba(61, 44, 46, 0.14);
+  --radius: 24px;
+  --nav-h: 68px;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: ui-rounded, "SF Pro Rounded", "Comic Sans MS", "Chalkboard SE", "Segoe UI", system-ui, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 400px at 100% -10%, #FFE9C9 0%, transparent 55%),
+    radial-gradient(900px 360px at -20% 20%, #FFD9D2 0%, transparent 50%),
+    var(--bg);
+  min-height: 100%;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.app {
+  max-width: 480px;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 16px 16px calc(var(--nav-h) + 24px);
+  position: relative;
+}
+
+/* блочные пятна-«облачка» на фоне */
+.app::before, .app::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  opacity: .5;
+  pointer-events: none;
+  z-index: 0;
+}
+.app::before { width: 130px; height: 130px; background: #FFD9A8; top: -40px; right: -40px; }
+.app::after { width: 90px; height: 90px; background: #FFCFC5; bottom: 60px; left: -30px; }
+
+.screen { display: none; animation: rise .35s ease both; position: relative; z-index: 1; }
+.screen.active { display: block; }
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Шапка ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand .logo {
+  width: 46px; height: 46px; border-radius: 16px;
+  background: linear-gradient(145deg, #FFD166, #FFA94D);
+  display: grid; place-items: center;
+  box-shadow: var(--shadow-sm);
+  font-size: 22px;
+}
+.brand b { font-size: 20px; letter-spacing: .2px; }
+.brand small { display: block; font-size: 11px; color: var(--ink-soft); font-weight: 600; }
+.chip {
+  background: var(--card); border: 2px solid var(--line);
+  padding: 7px 12px; border-radius: 999px;
+  font-size: 13px; font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- Карточки ---------- */
+.card {
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  margin-bottom: 14px;
+}
+.card-title { font-size: 17px; font-weight: 800; margin: 0 0 4px; }
+.card-sub { font-size: 13px; color: var(--ink-soft); margin: 0 0 12px; }
+
+/* ---------- Главная ---------- */
+.hero {
+  background: linear-gradient(150deg, #FFD166, #FF9E5E);
+  border-radius: var(--radius);
+  padding: 22px 18px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  border: 2px solid #F3B95B;
+  position: relative; overflow: hidden;
+}
+.hero .hi { font-size: 15px; font-weight: 700; opacity: .85; margin-bottom: 4px; }
+.hero h1 { margin: 0; font-size: 26px; line-height: 1.15; }
+.hero .mascot { position: absolute; right: 16px; bottom: 6px; font-size: 74px; transform: rotate(6deg); filter: drop-shadow(0 6px 8px rgba(0,0,0,.18)); }
+.hero .sub { margin-top: 6px; font-size: 13px; opacity: .9; max-width: 70%; }
+
+.sections { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.sec {
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+  padding: 14px;
+  cursor: pointer;
+  transition: transform .12s ease;
+  position: relative;
+}
+.sec:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(61,44,46,.14); }
+.sec .ico { font-size: 34px; display: block; margin-bottom: 8px; }
+.sec b { font-size: 14px; display: block; }
+.sec small { font-size: 12px; color: var(--ink-soft); }
+.sec .badge {
+  position: absolute; top: 8px; right: 8px;
+  background: var(--green); color: #fff;
+  border-radius: 999px; font-size: 10px; font-weight: 800;
+  padding: 2px 8px;
+}
+
+/* ---------- Сетки ---------- */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.pill {
+  background: var(--card); border: 2px solid var(--line);
+  border-radius: 18px; box-shadow: var(--shadow-sm);
+  padding: 10px; text-align: center; cursor: pointer;
+}
+.pill .m { font-size: 26px; display: block; }
+.pill .t { font-size: 12px; font-weight: 700; }
+.pill .k { display: block; font-size: 9px; color: var(--ink-soft); margin-top: 2px; }
+.pill:active { transform: translateY(3px); }
+.pill.on { border-color: var(--ink); background: #FFF1DD; }
+
+/* ---------- Карточка занятия по звуку ---------- */
+.sound-head {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--card); border: 2px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 14px; margin-bottom: 14px;
+}
+.sound-head .big { width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; font-size: 34px; box-shadow: var(--shadow-sm); }
+.sound-head b { font-size: 22px; display: block; }
+.sound-head small { color: var(--ink-soft); }
+
+.stage-tabs { display: flex; gap: 6px; margin-bottom: 14px; overflow-x: auto; padding-bottom: 4px; }
+.stage-tab {
+  flex: 1 0 auto; border: 2px solid var(--line); background: var(--card);
+  border-radius: 14px; padding: 8px 12px; font-size: 12px; font-weight: 700;
+  box-shadow: var(--shadow-sm); cursor: pointer; white-space: nowrap;
+}
+.stage-tab.on { border-color: var(--ink); background: #FFF1DD; }
+
+.word-card {
+  background: var(--card); border: 2px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 24px 18px; text-align: center; margin-bottom: 16px;
+}
+.word-card .art { font-size: 92px; line-height: 1.1; margin-bottom: 8px; }
+.word-card .txt { font-size: 30px; font-weight: 800; letter-spacing: .5px; }
+.colorLetter {
+  display: inline-grid; place-items: center;
+  width: 96px; height: 96px; border-radius: 28px;
+  color: #fff; font-size: 52px; font-weight: 800;
+  box-shadow: var(--shadow-sm); letter-spacing: 1px;
+}
+.word-card .stage-label { font-size: 12px; color: var(--ink-soft); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+.btn-speak {
+  margin: 12px auto 0; width: 74px; height: 74px; border-radius: 50%;
+  border: none; background: linear-gradient(145deg, #FFD166, #FF9E5E);
+  color: #fff; font-size: 32px; box-shadow: 0 6px 0 #D97E3E; cursor: pointer;
+  transition: transform .1s;
+}
+.btn-speak:active { transform: translateY(4px); box-shadow: 0 2px 0 #D97E3E; }
+.btn-speak.big { width: 96px; height: 96px; font-size: 42px; }
+
+.ctrl { display: flex; gap: 12px; }
+.btn {
+  flex: 1; border: none; border-radius: 18px; padding: 15px 10px;
+  font-weight: 800; font-size: 15px; cursor: pointer; color: var(--ink);
+  box-shadow: var(--shadow-sm); transition: transform .1s; font-family: inherit;
+}
+.btn:active { transform: translateY(3px); box-shadow: 0 0 0 rgba(0,0,0,0); }
+.btn.ok { background: var(--green); color: #fff; box-shadow: 0 4px 0 #5AA53F; }
+.btn.ok:active { box-shadow: 0 0 0 rgba(0,0,0,0); }
+.btn.again { background: #FFE3D6; border: 2px solid #F4B794; box-shadow: 0 3px 0 #E6A07B; }
+.btn.back { background: var(--card); border: 2px solid var(--line); box-shadow: 0 3px 0 var(--line); flex: 0 0 auto; padding: 12px 16px; border-radius: 16px; }
+.skip { border: none; background: none; color: var(--ink-soft); font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; padding: 6px; }
+
+.progress-dots { display: flex; gap: 6px; justify-content: center; margin-top: 14px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.dot.done { background: var(--green); }
+.dot.now { background: var(--accent); }
+
+/* ---------- Артикуляция ---------- */
+.arti-card {
+  background: var(--card); border: 2px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 18px; margin-bottom: 12px; cursor: pointer;
+}
+.arti-card .row { display: flex; align-items: center; gap: 14px; }
+.arti-card .m { font-size: 40px; }
+.arti-card b { font-size: 17px; }
+.arti-card p { margin: 4px 0 0; font-size: 13px; color: var(--ink-soft); }
+.demo {
+  margin-top: 14px; border-radius: 18px; overflow: hidden;
+  background: #FFF3E0;
+}
+.demo svg { display: block; width: 100%; height: auto; }
+.arti-steps { list-style: none; padding: 0; margin: 14px 0 0; }
+.arti-steps li { display: flex; gap: 10px; font-size: 14px; margin-bottom: 10px; align-items: flex-start; }
+.arti-steps .num {
+  flex: 0 0 24px; height: 24px; border-radius: 50%; background: var(--accent);
+  color: #fff; display: grid; place-items: center; font-size: 12px; font-weight: 800;
+}
+
+/* ---------- Игра «кто так говорит?» ---------- */
+.play-big {
+  background: var(--card); border: 2px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 20px; text-align: center; margin-bottom: 16px;
+}
+.play-big .who { font-size: 26px; font-weight: 800; margin-bottom: 4px; }
+.play-big .hint { font-size: 13px; color: var(--ink-soft); margin-bottom: 12px; }
+.play-big .face { font-size: 120px; line-height: 1.1; }
+.play-big .said {
+  font-size: 34px; font-weight: 800; margin-top: 10px; min-height: 44px;
+  color: var(--accent-2);
+}
+
+/* ---------- Прогресс ---------- */
+.stat-row { display: flex; gap: 10px; margin-bottom: 14px; }
+.stat { flex: 1; background: var(--card); border: 2px solid var(--line); border-radius: 18px; box-shadow: var(--shadow-sm); padding: 12px; text-align: center; }
+.stat .n { font-size: 24px; font-weight: 800; }
+.stat .l { font-size: 11px; color: var(--ink-soft); }
+.mastery { display: flex; flex-wrap: wrap; gap: 8px; }
+.ms {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--card); border: 2px solid var(--line); border-radius: 999px;
+  padding: 6px 12px; font-size: 13px; font-weight: 700; box-shadow: var(--shadow-sm);
+}
+.ms .bar { width: 46px; height: 8px; border-radius: 999px; background: #F1E3CB; overflow: hidden; }
+.ms .bar i { display: block; height: 100%; border-radius: 999px; background: var(--green); }
+.empty-hint { color: var(--ink-soft); font-size: 14px; text-align: center; padding: 20px 8px; }
+
+.history { list-style: none; padding: 0; margin: 0; }
+.history li { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px dashed var(--line); font-size: 13px; }
+.history li:last-child { border-bottom: none; }
+.history .when { color: var(--ink-soft); font-weight: 700; white-space: nowrap; }
+.history .what { flex: 1; }
+.history .res { font-weight: 800; }
+.history .res.good { color: #5AA53F; }
+
+/* ---------- Кнопка назад в звуках ---------- */
+.backrow { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.crumb { flex: 1; font-size: 15px; font-weight: 800; }
+
+/* ---------- Нижняя навигация ---------- */
+.nav {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: 12px; width: min(480px, calc(100% - 20px));
+  height: var(--nav-h);
+  background: rgba(255, 253, 247, .96);
+  border: 2px solid var(--line);
+  border-radius: 22px;
+  box-shadow: 0 10px 26px rgba(61, 44, 46, .22);
+  display: flex; z-index: 50;
+}
+.nav button {
+  flex: 1; border: none; background: none; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3px; font-family: inherit; color: var(--ink-soft); font-size: 10px; font-weight: 700;
+  border-radius: 18px;
+}
+.nav button .i { font-size: 22px; filter: grayscale(1); opacity: .55; transition: .15s; }
+.nav button.on { color: var(--ink); }
+.nav button.on .i { filter: none; opacity: 1; transform: translateY(-2px); }
+
+/* ---------- Микро-анимации ---------- */
+.pop { animation: pop .4s cubic-bezier(.2,2,.4,1); }
+@keyframes pop { 0% { transform: scale(.6); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.wob { animation: wob 2.4s ease-in-out infinite; }
+@keyframes wob { 0%,100%{ transform: rotate(-3deg);} 50%{ transform: rotate(3deg);} }
+
+.confetti {
+  position: fixed; inset: 0; pointer-events: none; z-index: 60;
+  background-image:
+    radial-gradient(circle, #FF8B6E 20%, transparent 21%),
+    radial-gradient(circle, #F7CE58 20%, transparent 21%),
+    radial-gradient(circle, #7ECB5C 20%, transparent 21%);
+  background-size: 60px 60px; background-position: 10px 10px;
+  animation: conf 1s ease-out forwards;
+  opacity: 0;
+}
+@keyframes conf { 0% { opacity: 0; } 20% { opacity: .7; } 100% { opacity: 0; } }
+
+/* скрытие горизонтального скролла табов */
+.stage-tabs::-webkit-scrollbar { display: none; }
