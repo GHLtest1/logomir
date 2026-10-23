@@ -687,8 +687,7 @@
         <span class="full-art"${it.file ? ` data-img="${itemImg(it)}"` : ''}>${it.emoji}</span>
         <div class="full-name">${esc(it.name)}</div>
         <button class="btn-speak big" id="fullPlay">🔊</button>
-      </div>
-      <div class="full-tap"></div>`;
+      </div>`;
     document.body.appendChild(ov);
     const art = ov.querySelector('.full-art');
     if (art && art.dataset.img) {
@@ -705,7 +704,9 @@
     const close = () => { if (ov.parentNode) ov.parentNode.removeChild(ov); };
     ov.querySelector('.full-close').onclick = close;
     ov.addEventListener('click', (e) => {
-      if (e.target === ov || e.target.classList.contains('full-tap')) close();
+      const box = ov.querySelector('.full-box');
+      if (e.target === ov) close();
+      else if (box && !box.contains(e.target)) close();
     });
   }
 
