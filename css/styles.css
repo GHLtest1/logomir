@@ -391,6 +391,25 @@ body {
 .game-opt:not(.locked):active { transform: scale(.95); }
 
 /* ---------- Полноэкранный просмотр звука ---------- */
+.scr-head {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 22px; box-shadow: var(--shadow-sm);
+  padding: 12px; margin-bottom: 14px;
+}
+.scr-head .htile {
+  width: 52px; height: 52px; border-radius: 16px; overflow: hidden;
+  flex: 0 0 52px; background: #fff; box-shadow: var(--shadow-sm);
+}
+.scr-head .htile img { width: 100%; height: 100%; object-fit: cover; }
+.scr-head b { font-size: 17px; display: block; }
+.scr-head small { color: var(--ink-soft); font-size: 12px; }
+.play-banner {
+  width: 100%; border-radius: 22px; overflow: hidden; margin-bottom: 14px;
+  box-shadow: var(--shadow-sm);
+}
+.play-banner img { display: block; width: 100%; height: auto; }
+
 .fullov {
   position: fixed; inset: 0; z-index: 100;
   background: radial-gradient(120% 120% at 50% 30%, rgba(61,44,46,.88), rgba(30,20,22,.96));

@@ -155,6 +155,7 @@
   function renderSounds() {
     const p = store();
     screens.sounds.innerHTML = `
+      <div class="scr-head"><span class="htile"><img src="/assets/hero-fox.webp" alt=""></span><span><b>Проработка звуков</b><small>Тренируем звук по этапам</small></span></div>
       <div class="card">
         <p class="card-title">Выбери зверёнка-звук</p>
         <p class="card-sub">Нажми на зверька, чей звук тренируем. Сначала — слоги, потом слова и фразы.</p>
@@ -416,6 +417,7 @@
   function renderPlay() {
     const item = D.play.find(p => p.id === state.playId) || D.play[state.playId != null ? Math.min(D.play.length - 1, Math.floor(state.playId)) : 0];
     screens.play.innerHTML = `
+      <div class="play-banner"><img src="/assets/play-talking.webp" alt=""></div>
       <div class="card">
         <p class="card-title">Кто так говорит?</p>
         <p class="card-sub">Покажи картинку, нажми на громкоговоритель, малыш повторяет. Потом отметь — получилось ли.</p>
@@ -721,6 +723,7 @@
   function renderLibrary() {
     const onCats = state.libTab !== 'games';
     screens.library.innerHTML = `
+      <div class="scr-head"><span class="htile"><img src="/assets/hero-fox.webp" alt=""></span><span><b>Звуки</b><small>Изучаем звуки вокруг</small></span></div>
       <div class="seg">
         <button class="seg-btn ${onCats ? 'on' : ''}" id="segCats">🔊 Звуки</button>
         <button class="seg-btn ${!onCats ? 'on' : ''}" id="segGames">🎮 Игры</button>
